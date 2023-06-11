@@ -1,0 +1,17 @@
+<a
+    data-calendar-toggler
+    i18n-aria-label
+    i18n-title
+    aria-label="Fermer"
+    title="Fermer"
+    href="#"
+    class="select-none cursor-pointer inline-flex items-center flex-row space-x-2 flex-nowrap text-left text-005743 hover:opacity-80 active:animate-pulse"
+    (click)="emitTap()"
+>
+    <span class="inline-flex items-center justify-center w-6 h-6 flex-shrink-0">
+        <fa-icon [icon]="faXmark" />
+    </span>
+    <span i18n class="font-semibold tracking-m0dt02 text-base">
+      {{ closeText }}
+    </span>
+</a>

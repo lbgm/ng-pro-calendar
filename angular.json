@@ -99,6 +99,46 @@
           }
         }
       }
+    },
+    "pro-calendar": {
+      "projectType": "library",
+      "root": "projects/pro-calendar",
+      "sourceRoot": "projects/pro-calendar/src",
+      "prefix": "lib",
+      "i18n": {
+        "sourceLocale": "fr-FR",
+        "locales": {
+          "en-US": "projects/pro-calendar/src/locale/messages.en.xlf",
+          "pt-BR": "projects/pro-calendar/src/locale/messages.pt.xlf"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/pro-calendar/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/pro-calendar/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/pro-calendar/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/pro-calendar/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
     }
   }
 }
