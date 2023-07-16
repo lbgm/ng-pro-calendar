@@ -1,0 +1,41 @@
+<span *ngIf="!directLink then noDirectLinkTemplate else directLinkTemplate;"></span>  
+
+<ng-template #noDirectLinkTemplate>
+    <a
+        href="#"
+        class="underline inline-flex items-center font-medium text-2062F6 text-xs leading-relaxed hover:opacity-80 active:animate-pulse"
+        (click)="clicked.emit()"
+    >
+        <span
+            #linkActionIcon
+            class="inline-flex items-center justify-center"
+            [ngClass]="{
+                'mr-2': iconmgl === 2 && linkActionIcon.children.length !== 0,
+                'mr-1': iconmgl === 1 && linkActionIcon.children.length !== 0,
+            }"
+        >
+            <ng-content select="[icon]"></ng-content>
+        </span>
+        <span class="truncate">
+            {{ text }}
+        </span>
+    </a>
+</ng-template>
+
+<ng-template #directLinkTemplate>
+    <a
+        href="#"
+        class="underline inline-flex items-center font-medium text-2062F6 text-xs leading-relaxed hover:opacity-80 active:animate-pulse"
+    >
+        <span
+            #linkActionIcon
+            class="inline-flex items-center justify-center"
+            [ngClass]="{ 'mr-2': linkActionIcon.children.length !== 0}"
+        >
+            <ng-content select="[icon]"></ng-content>
+        </span>
+        <span class="truncate">
+            {{ text }}
+        </span>
+    </a>
+</ng-template>

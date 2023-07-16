@@ -9,7 +9,7 @@ export class TrPipe implements PipeTransform {
 
   constructor (private translateService: TranslateService) {}
 
-  transform(value: string, locale?: string): unknown {
+  transform(value: string, locale?: string): string{
     return this.translateService.translate(value, locale);
   }
 

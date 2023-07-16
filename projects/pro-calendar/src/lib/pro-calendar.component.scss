@@ -1,0 +1,13 @@
+:host {
+    display: block;
+}
+
+.calendar-wrapper {
+    height: calc(100vh - 66px);
+}
+
+.side-event-box {
+    &.below-native-datepicker {
+        height: calc(100% - 92px);
+    }
+}

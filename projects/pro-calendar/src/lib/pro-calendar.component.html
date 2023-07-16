@@ -1,1 +1,47 @@
-<close-button></close-button>
+<div
+    class="widget-calendar-wrapper relative w-full h-screen flex flex-row flex-nowrap bg-F4F6F9 min-h-screen"
+>
+    <!-- left menu-->
+
+    <!-- calendar base-->
+    <div
+      class="calendar-base w-full grow border border-white bg-white p-4 pb-0"
+    >
+      <!-- calendar base header -->
+      <header-comp>
+        <!--Arrows-->
+        <calendar-arrows
+          (left)="prevDate(dateSelected())"
+          (right)="nextDate(dateSelected())"
+          [label]="getSelectedDateLabel"
+        />
+        <!-- DayToggle-->
+        <view-toggle
+          #viewToggle
+          (viewtype)="view_type.set($event)"
+          [view]="view"
+        />
+        <!--Search-->
+        <calendar-search
+          (typingFinish)="runSearch($event)"
+          [placeholder]="configs().searchPlaceholder"
+        />
+      </header-comp>
+      <!--calendar-->
+      <div
+        data-widget-item="widget-calendar-comp"
+        class="calendar-wrapper w-full mt-4 overflow-y-auto custom-scrll"
+      >
+        <!--calendar week-view-->
+        
+
+        <!--calendar day-view-->
+
+        
+        <!--calendar month-view-->
+        
+      </div>
+    </div>
+
+    <!---->
+</div>

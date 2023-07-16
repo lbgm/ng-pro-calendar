@@ -1,0 +1,53 @@
+<div class="select-none flex space-x-2 flex-row flex-nowrap items-center min-w-10dt125rem">
+    <!--left button icon master-->
+    <a 
+        class="bg-F4F4F5 w-7 h-7 rounded-tl-md rounded-bl-md inline-flex flex-shrink-0 items-center justify-center hover:opacity-80 active:animate-pulse cursor-pointer calendar--arrows-left"
+        href="#" 
+        (click)="left.emit()" 
+        title="{{ 'previous_day' | tr }}"
+    >
+        <span 
+            #leftSwitchArrow 
+            [attr.data-left-switch-arrow]="leftSwitchArrow.children.length" 
+            class="inline-flex flex-shrink-0"
+        >
+            <ng-content select="[rightSwitchArrow]"></ng-content>
+        </span>
+        <!--default icon-->
+        <fa-icon 
+            *ngIf="!leftSwitchArrow.children.length" 
+            [attr.data-left-switch-arrow]="leftSwitchArrow.children.length" 
+            class="text-base text-18181B" 
+            icon="chevron-left"
+        />
+    </a>
+    <!-- label -->
+    <span
+      *ngIf="!configs()?.nativeDatepicker"
+      class="capitalize bg-F4F4F5 text-18181B text-center py-0dt375 px-4 flex-shrink-0 font-medium text-xs mx-px"
+    >
+      {{ label }}
+    </span>
+    <!--right button icon master-->
+    <a 
+        class="bg-F4F4F5 rounded-tr-md rounded-br-md w-7 h-7 inline-flex flex-shrink-0 items-center justify-center hover:opacity-80 active:animate-pulse cursor-pointer calendar--arrows-right"
+        href="#" 
+        (click)="right.emit()"
+        title="{{ 'next_day' | tr }}"
+    >
+        <span 
+            #rightSwitchArrow 
+            [attr.data-right-switch-arrow]="rightSwitchArrow.children.length" 
+            class="inline-flex flex-shrink-0"
+        >
+            <ng-content select="[rightSwitchArrow]"></ng-content>
+        </span>
+        <!--default icon-->
+        <fa-icon 
+            *ngIf="!rightSwitchArrow.children.length" 
+            [attr.data-right-switch-arrow]="rightSwitchArrow.children.length" 
+            class="text-base text-18181B" 
+            icon="chevron-right"
+        />
+    </a>
+</div>

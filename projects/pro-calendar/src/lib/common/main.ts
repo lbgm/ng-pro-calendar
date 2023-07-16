@@ -1,4 +1,4 @@
-const locale: string = window.navigator.language.split("-")[0] ?? 'fr';
+const locale = window.navigator.language.split("-")[0];
 
 export const twoDigitTime = (part: string | number): string => {
   return String("0" + part).slice(-2);

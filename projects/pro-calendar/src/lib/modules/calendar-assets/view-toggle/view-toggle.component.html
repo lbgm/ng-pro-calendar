@@ -1,0 +1,16 @@
+<div class="calendar-day-toggle select-none flex flex-row flex-nowrap items-center transition-all min-w-16dt563">
+    <!---->
+    <a 
+        *ngFor="let tab of tabs | keyvalue; trackBy: tracktab;" 
+        href="#"
+        class="text-71717A py-0dt375 px-4 inline-flex font-medium text-sm leading-5 flex-shrink-0 items-center justify-center hover:opacity-80 active:animate-pulse cursor-pointer"
+        [ngClass]="{
+            'rounded-md bg-14-165-233 text-white hover:opacity-90': view === tab.value,
+            'bg-white': view !== tab.value,
+        }" 
+        (click)="changeViewType(tab.value, $event)"
+    >
+        {{ tab.value | tr }}
+    </a>
+    <!---->
+</div>

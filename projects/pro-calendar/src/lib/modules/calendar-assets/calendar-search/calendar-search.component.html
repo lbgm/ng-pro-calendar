@@ -1,0 +1,33 @@
+<div
+    class="min-w-11dt5 bg-F4F4F5 border border-F4F4F5 rounded px-1 py-0dt375 flex flex-shrink-0 flex-nowrap items-center space-x-2"
+    title="{{ 'search_tip' | tr }}"
+    attr.aria-label="{{ 'search_tip' | tr }}"
+  >
+    <span class="inline-flex flex-whrink-0 select-none">
+        <span 
+            #searchIcon 
+            [attr.data-search-icon]="searchIcon.children.length" 
+            class="inline-flex flex-shrink-0"
+        >
+            <ng-content select="[searchIcon]"></ng-content>
+        </span>
+        <!--default icon-->
+        <fa-icon 
+            *ngIf="!searchIcon.children.length" 
+            [attr.data-search-icon]="searchIcon.children.length" 
+            class="text-base text-18181B" 
+            icon="magnifying-glass"
+        />
+    </span>
+    <input
+        #searchInput
+        input-typing
+        (finish)="typingFinish.emit(searchInput.value)"
+        (run)="typingRun.emit(searchInput.value)"
+        (input)="handleInput.emit(searchInput.value)"
+        [inputInterval]="timing"
+        [placeholder]="placeholder || ('search' | tr)"
+        class="bg-F4F4F5 flex-shrink w-full text-xs text-left text-A1A1AA font-medium appearance-none border-0 outline-none focus:font-bold"
+        type="text"
+    />
+  </div>
