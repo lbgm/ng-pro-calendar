@@ -2,7 +2,6 @@ import { Directive, ElementRef, EventEmitter, HostListener, Input, Output } from
 
 @Directive({
   selector: '[input-typing]',
-  standalone: true
 })
 export class InputTypingDirective {
 
