@@ -24,7 +24,7 @@ export class ViewToggleComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-   this.viewtype.emit(this.view);
+    this.viewtype.emit(this.view);
   }
 
   changeViewType(state: T_View, event: Event): void {

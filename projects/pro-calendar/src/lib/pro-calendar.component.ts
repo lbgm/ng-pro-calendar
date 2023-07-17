@@ -1,6 +1,6 @@
 import { Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, Signal, SimpleChanges, TemplateRef, WritableSignal, computed, effect, signal } from '@angular/core';
-import { Appointment, Configs, T_View } from './types/main';
-import { ConfigsService } from './services/configs.service';
+import { Appointment, Configs, IStartEndDates, T_View } from './types/main';
+import { StoreService } from './services/store.service';
 
 import {
   dateLabel,
@@ -19,11 +19,6 @@ import {
   nextDate,
 } from "./common/main";
 import { TrPipe } from './pipes/tr.pipe';
-
-type IStartEndDates = {
-  start: Date | string;
-  end: Date | string
-};
 
 @Component({
   selector: 'pro-calendar',
@@ -106,7 +101,7 @@ export class ProCalendarComponent implements OnInit, OnChanges {
 
   constructor(
     private el: ElementRef,
-    private configsService: ConfigsService,
+    private storeService: StoreService,
     private trPipe: TrPipe
   ) {
 
@@ -129,30 +124,35 @@ export class ProCalendarComponent implements OnInit, OnChanges {
       allowSignalWrites: true
     })
   };
-
+  
+  // display date selected on calendar-arrows
   get getSelectedDateLabel(): string {
     return /calendar/i.test(this.dateLabel(this.dateSelected())) ? this.trPipe.transform(this.dateLabel(this.dateSelected())) : dateLabel(this.dateSelected());
   }
 
   ngOnInit(): void {
-    this.configsService.getConfigs.subscribe((value: Configs) => {
+    this.storeService.getConfigs.subscribe((value: Configs) => {
       this.configs.set(value);
     });
 
-    this.configsService.getEvents.subscribe((value: Appointment[]) => {
+    this.storeService.getEvents.subscribe((value: Appointment[]) => {
       this.calendarEvents.set(value);
     });
-
+    
+    // generate day times
     this.generateDayTimes();
-
+    
+    // boot with first props
     this.verifyFirstBind();
   }
 
 
-
+  // when props change ?
   ngOnChanges(changes: SimpleChanges): void {
-    this.configsService.setEvents = this.events as Appointment[];
-    this.configsService.setConfigs = this.config as Configs;
+    // events
+    this.storeService.setEvents = this.events as Appointment[];
+    // configs
+    this.storeService.setConfigs = this.config as Configs;
   }
 
   /**
@@ -165,7 +165,7 @@ export class ProCalendarComponent implements OnInit, OnChanges {
     let _search = [];
     //
     if (!value.replace(/\s/g, "").length) {
-      this.configsService.setEvents = this.events as Appointment[];
+      this.storeService.setEvents = this.events as Appointment[];
       return void 0;
     }
     //
@@ -178,7 +178,7 @@ export class ProCalendarComponent implements OnInit, OnChanges {
       }
     });
     this.isLoading.set(false);
-    if (_search.length !== 0) this.configsService.setEvents = _search;
+    if (_search.length !== 0) this.storeService.setEvents = _search;
   }
 
   /**
@@ -225,9 +225,9 @@ export class ProCalendarComponent implements OnInit, OnChanges {
     }
 
     // events
-    this.configsService.setEvents = this.events as Appointment[];
+    this.storeService.setEvents = this.events as Appointment[];
     // config
-    this.configsService.setConfigs = this.config as Configs;
+    this.storeService.setConfigs = this.config as Configs;
   };
 
 }

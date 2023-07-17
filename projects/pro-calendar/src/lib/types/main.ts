@@ -29,3 +29,8 @@ export type Configs = {
     closeText?: string;
     nativeDatepicker?: boolean;
 }
+
+export type IStartEndDates = {
+    start: Date | string;
+    end: Date | string
+};

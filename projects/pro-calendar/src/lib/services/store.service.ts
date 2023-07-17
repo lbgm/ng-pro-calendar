@@ -5,7 +5,7 @@ import { Appointment, Configs } from '../types/main'
 @Injectable({
   providedIn: 'root'
 })
-export class ConfigsService {
+export class StoreService {
 
   #events: BehaviorSubject<Appointment[]> = new BehaviorSubject<Appointment[]>([]);
 

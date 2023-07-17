@@ -1,10 +1,10 @@
 import { Inject, Injectable } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import fr from '../assets/calendar.fr.json';
-import en from '../assets/calendar.en.json';
-import pt from '../assets/calendar.pt.json';
+import fr from '../locales/calendar.fr.json';
+import en from '../locales/calendar.en.json';
+import pt from '../locales/calendar.pt.json';
 
-type IDictionnary = {
+type IDictionary = {
   [key: string]: any;
 }
 
@@ -14,7 +14,7 @@ type IDictionnary = {
 export class TranslateService {
 
   #lang: string = window.navigator.language.split("-")[0];
-  #dictionary: IDictionnary = {};
+  #dictionary: IDictionary = {};
 
   constructor(@Inject(DOCUMENT) private document: Document) {
     this.document.documentElement.lang = this.#lang;
@@ -30,7 +30,7 @@ export class TranslateService {
   translate(key: string, locale: string = this.#lang): string {
     try {
       const keys = key.split('.');
-      return keys.reduce((previous: IDictionnary, current: string) => {
+      return keys.reduce((previous: IDictionary, current: string) => {
         return previous[current];
       }, this.#dictionary?.[locale] ?? this.#dictionary["en"]) as unknown as string;
     } catch (e) {

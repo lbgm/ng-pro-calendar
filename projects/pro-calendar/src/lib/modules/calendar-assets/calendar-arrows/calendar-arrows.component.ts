@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, WritableSignal, signal } from '@angular/core';
-import { ConfigsService } from '../../../services/configs.service';
+import { StoreService } from '../../../services/store.service';
 import { Configs } from '../../../types/main';
 
 @Component({
@@ -18,10 +18,10 @@ export class CalendarArrowsComponent implements OnInit {
 
   configs: WritableSignal<Configs> = signal({});
 
-  constructor(private configsService: ConfigsService) { }
+  constructor(private storeService: StoreService) { }
 
   ngOnInit(): void {
-    this.configsService.getConfigs.subscribe((value: Configs) => {
+    this.storeService.getConfigs.subscribe((value: Configs) => {
        this.configs.set(value);
     });
   }

@@ -13,7 +13,7 @@ export class CalendarSearchComponent {
   @Input() placeholder?: string = "";
   @Input() timing?: number = 200;
 
-  @Output('input') handleInput: EventEmitter<string> = new EventEmitter<string>();
+  @Output('search') handleInput: EventEmitter<string> = new EventEmitter<string>();
   @Output() typingFinish: EventEmitter<string> = new EventEmitter<string>(); 
   @Output() typingRun: EventEmitter<string> = new EventEmitter<string>(); 
 }
