@@ -4,7 +4,7 @@ import { FaConfig, FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular
 import { CloseButtonComponent } from './close-button/close-button.component';
 import { TrPipe } from '../../pipes/tr.pipe';
 
-import { faChevronLeft, faChevronRight, faMagnifyingGlass, fas } from '@fortawesome/free-solid-svg-icons';
+import { faCalendar, faChevronLeft, faChevronRight, faMagnifyingGlass, fas } from '@fortawesome/free-solid-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { InputTypingDirective } from '../../directives/input-typing.directive';
@@ -15,6 +15,7 @@ import { CalendarArrowsComponent } from './calendar-arrows/calendar-arrows.compo
 import { ViewToggleComponent } from './view-toggle/view-toggle.component';
 import { HeaderCompComponent } from './header-comp/header-comp.component';
 import { CalendarNativeDatepickerComponent } from './calendar-native-datepicker/calendar-native-datepicker.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -33,6 +34,7 @@ import { CalendarNativeDatepickerComponent } from './calendar-native-datepicker/
   ],
   imports: [
     CommonModule,
+    FormsModule,
     FontAwesomeModule
   ],
   exports: [
@@ -47,6 +49,7 @@ import { CalendarNativeDatepickerComponent } from './calendar-native-datepicker/
     CalendarArrowsComponent,
     ViewToggleComponent,
     HeaderCompComponent,
+    CalendarNativeDatepickerComponent,
     // pipes
     TrPipe,
     // directives
@@ -56,7 +59,7 @@ import { CalendarNativeDatepickerComponent } from './calendar-native-datepicker/
 export class CalendarAssetsModule {
   constructor(library: FaIconLibrary, faConfig: FaConfig) {
     // Add an icon to the library for convenient access in other components
-    library.addIcons(faXmark, faMagnifyingGlass, faChevronLeft, faChevronRight);
+    library.addIcons(faXmark, faMagnifyingGlass, faChevronLeft, faChevronRight, faCalendar);
     faConfig.fixedWidth = true;
     library.addIconPacks(fas, far);
   }

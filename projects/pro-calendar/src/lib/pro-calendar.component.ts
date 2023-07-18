@@ -66,7 +66,7 @@ export class ProCalendarComponent implements OnInit, OnChanges {
 
   dayTimes: WritableSignal<string[]> = signal([]);
 
-  view_type: WritableSignal<T_View> = signal(this.view as T_View);
+  defineView: WritableSignal<T_View> = signal(this.view as T_View);
 
   externalRequestDate: WritableSignal<Date | undefined> = signal(undefined);
 

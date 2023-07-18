@@ -13,21 +13,21 @@ import { KeyValue } from '@angular/common';
 export class ViewToggleComponent implements OnInit, OnChanges {
   @Input() view?: T_View = "week";
 
-  @Output() viewtype: EventEmitter<T_View> = new EventEmitter<T_View>();
+  @Output() viewChanged: EventEmitter<T_View> = new EventEmitter<T_View>();
 
   tabs: Record<string, T_View> = {
     ...Object.fromEntries(Object.entries(E_View)),
   };
 
   ngOnInit(): void {
-    this.viewtype.emit(this.view);
+    this.viewChanged.emit(this.view);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.viewtype.emit(this.view);
+    this.viewChanged.emit(this.view);
   }
 
-  changeViewType(state: T_View, event: Event): void {
+  changeView(state: T_View, event: Event): void {
     event.stopPropagation();
     event.preventDefault();
 

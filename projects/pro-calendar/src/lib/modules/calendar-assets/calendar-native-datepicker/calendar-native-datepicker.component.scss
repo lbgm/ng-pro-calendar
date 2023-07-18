@@ -1,0 +1,8 @@
+:host {
+    @apply flex;
+}
+
+input[type="date"],
+input[type="date"]::-webkit-calendar-picker-indicator {
+    @apply w-full h-full absolute top-0 left-0 opacity-0 box-border cursor-pointer;
+}

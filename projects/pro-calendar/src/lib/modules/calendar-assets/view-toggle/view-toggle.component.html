@@ -8,7 +8,7 @@
             'rounded-md bg-14-165-233 text-white hover:opacity-90': view === tab.value,
             'bg-white': view !== tab.value,
         }" 
-        (click)="changeViewType(tab.value, $event)"
+        (click)="changeView(tab.value, $event)"
     >
         {{ tab.value | tr }}
     </a>

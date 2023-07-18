@@ -1,13 +1,11 @@
 :host {
-    display: block;
+    @apply block;
 }
 
 .primary-loader {
-    width: 16px;
-    height: 16px;
-    border: 2px solid rgba(0, 0, 0, 0.1);
+    @apply w-4 h-4 border-2 rounded-full;
+    border-color: rgba(0, 0, 0, 0.1);
     border-top-color: rgb(14, 165, 233);
-    border-radius: 50%;
     -webkit-animation: spin 2s linear infinite;
     /* Safari */
     animation: spin 1s linear infinite;

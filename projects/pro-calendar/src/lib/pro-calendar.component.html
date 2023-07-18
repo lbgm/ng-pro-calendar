@@ -2,6 +2,29 @@
     class="widget-calendar-wrapper relative w-full h-screen flex flex-row flex-nowrap bg-F4F6F9 min-h-screen"
 >
     <!-- left menu-->
+    <left-menu
+      [date]="externalRequestDate()"
+      (calendarDatepicker)="dateSelected.set($event)"
+      (calendarClose)="calendarClosed.emit()"
+      #leftMenu
+    >
+      <!-- slots -->
+      <ng-container loader>
+        <span #loaderSlot class="inline-flex">
+          <ng-content 
+            [attr.calendarGotLoading]="calendarGotLoading()" 
+            selector="[loader]"
+          >
+           <!---->
+          </ng-content>
+        </span>
+        <!-- default loader -->
+        <ng-container *ngIf="!loaderSlot.children.length">
+          <loader-widget *ngIf="calendarGotLoading()" />
+        </ng-container>
+      </ng-container>
+
+    </left-menu>
 
     <!-- calendar base-->
     <div
@@ -18,7 +41,7 @@
         <!-- DayToggle-->
         <view-toggle
           #viewToggle
-          (viewtype)="view_type.set($event)"
+          (viewChanged)="defineView.set($event)"
           [view]="view"
         />
         <!--Search-->
