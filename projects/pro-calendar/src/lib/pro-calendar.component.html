@@ -55,19 +55,30 @@
       >
         <!--calendar week-view-->
         <ng-container *ngIf="defineView() === 'week'">
-          {{ defineView() }}
+          <week-view 
+            [weekDays]="weekDays()"
+            [dateSelected]="dateSelected()"
+            [dayTimes]="dayTimes()" 
+          />
         </ng-container>
         
 
         <!--calendar day-view-->
         <ng-container *ngIf="defineView() === 'day'">
-          <day-view [dateSelected]="dateSelected()" [dayTimes]="dayTimes()" />
+          <day-view 
+            [dateSelected]="dateSelected()" 
+            [dayTimes]="dayTimes()" 
+          />
         </ng-container>
 
         
         <!--calendar month-view-->
         <ng-container *ngIf="defineView() === 'month'">
-          {{ defineView() }}
+          <month-view 
+            [weekDays]="weekDays()" 
+            [monthDays]="monthDays()" 
+            [dateSelected]="dateSelected()" 
+          />
         </ng-container>
         
       </div>

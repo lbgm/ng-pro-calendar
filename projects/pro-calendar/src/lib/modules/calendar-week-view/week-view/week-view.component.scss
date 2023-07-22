@@ -1,0 +1,36 @@
+:host {
+    @apply block;
+}
+
+.calendar--week-view-not-in---week {
+    opacity: 0.5;
+}
+
+.calendar--week-view--header {
+    .day-header {
+        &.weekindex {
+            @apply bg-FAFAFA;
+        }
+
+        &.selection {
+            @apply bg-EFF6FF;
+        }
+    }
+}
+
+.calendar--week-view--row {
+    .time-cell {
+        @apply relative;
+        transform: translateY(-0.5rem);
+    }
+
+    .day-cell {
+        &.weekindex {
+            @apply bg-FAFAFA;
+        }
+
+        &.selection {
+            @apply bg-EFF6FF;
+        }
+    }
+}

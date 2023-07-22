@@ -1,6 +1,6 @@
-import { Component, Input, OnChanges, SimpleChanges, WritableSignal, signal } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, TemplateRef, WritableSignal, signal } from '@angular/core';
 import {
-  twoDigitTime, 
+  twoDigitTime,
   incrementTime,
   fixDateTime,
   randomId,
@@ -18,10 +18,11 @@ import {
   ]
 })
 export class DayViewComponent implements OnChanges {
-  @Input() dateSelected?: string | Date;
-  @Input() dayTimes?: string[] = [];
+  @Input() dateSelected!: Date;
+  @Input() dayTimes: string[] = [];
+  @Input('eventCard') eventCardRef!: TemplateRef<any>;
 
-  inDateView: WritableSignal<Date> = signal(this.dateSelected as Date);
+  inDateView: WritableSignal<Date> = signal(this.dateSelected);
 
   twoDigitTime = twoDigitTime;
   incrementTime = incrementTime;
@@ -32,7 +33,7 @@ export class DayViewComponent implements OnChanges {
   timeFormat = timeFormat;
 
   ngOnChanges(changes: SimpleChanges): void {
-      if (this.dateSelected) this.inDateView.set(this.dateSelected as Date);
+    if (this.dateSelected) this.inDateView.set(this.dateSelected);
   }
 
   trackDayTimes(index: number, time: string): number {

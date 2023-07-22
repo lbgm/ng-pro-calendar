@@ -1,0 +1,13 @@
+:host {
+    @apply block;
+}
+
+.calendar--month-view-not-in---month {
+    opacity: 0.5;
+}
+
+.calendar--month-view-actual-day {
+    @apply inline-flex items-center justify-center font-bold w-7 h-7 text-base text-white bg-0EA5E9;
+    line-height: 18px;
+    border-radius: 50%;
+}
