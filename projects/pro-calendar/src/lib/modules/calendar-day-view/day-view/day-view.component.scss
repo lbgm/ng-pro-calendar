@@ -1,0 +1,10 @@
+:host {
+    @apply block;
+}
+
+.calendar--day-view--row {
+    .time-cell {
+        @apply relative;
+        transform: translateY(-0.5rem);
+    }
+}

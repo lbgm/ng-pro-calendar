@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, ContentChild, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
 
 @Component({
   selector: 'link-action',
@@ -14,4 +14,6 @@ export class LinkActionComponent {
   @Input() iconmgl?: number = 2;
 
   @Output() clicked: EventEmitter<void> = new EventEmitter<void>();
+
+  @ContentChild('icon') iconRef!: TemplateRef<any>;
 }

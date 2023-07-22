@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, WritableSignal, signal } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, TemplateRef, WritableSignal, signal } from '@angular/core';
 import { StoreService } from '../../../services/store.service';
 import { Configs } from '../../../types/main';
 
@@ -15,6 +15,9 @@ export class CalendarArrowsComponent implements OnInit {
 
   @Output() left: EventEmitter<void> = new EventEmitter<void>();
   @Output() right: EventEmitter<void> = new EventEmitter<void>();
+
+  @Input('leftSwitchArrow') leftSwitchArrowRef!: TemplateRef<any>;
+  @Input('rightSwitchArrow') rightSwitchArrowRef!: TemplateRef<any>;
 
   configs: WritableSignal<Configs> = signal({});
 

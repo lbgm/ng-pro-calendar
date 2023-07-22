@@ -1,7 +1,6 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, WritableSignal, effect, signal } from '@angular/core';
+import { Component, ContentChild, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, TemplateRef, WritableSignal, effect, signal } from '@angular/core';
 import { Configs } from '../../../types/main';
 import { StoreService } from '../../../services/store.service';
-import { ThisReceiver } from '@angular/compiler';
 
 @Component({
   selector: 'left-menu',
@@ -18,10 +17,12 @@ export class LeftMenuComponent implements OnInit, OnChanges {
   @Output() calendarClose: EventEmitter<void> = new EventEmitter<void>();
 
   configs: WritableSignal<Configs> = signal({});
-
   dateRequested: WritableSignal<Date | undefined> = signal(this.date);
-
   datepicked: WritableSignal<Date> = signal(new Date());
+
+  @ContentChild('loader') loaderRef!: TemplateRef<any>;
+  @ContentChild('sideEvent') sideEventRef!: TemplateRef<any>;
+  @ContentChild('closeButton') closeButtonRef!: TemplateRef<any>;
 
   constructor(private storeService: StoreService) { 
     effect(() => {

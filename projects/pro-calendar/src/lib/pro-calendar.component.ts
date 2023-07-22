@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, Signal, SimpleChanges, TemplateRef, WritableSignal, computed, effect, signal } from '@angular/core';
+import { Component, ContentChild, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, Signal, SimpleChanges, TemplateRef, ViewChild, WritableSignal, computed, effect, signal } from '@angular/core';
 import { Appointment, Configs, IStartEndDates, T_View } from './types/main';
 import { StoreService } from './services/store.service';
 
@@ -19,6 +19,7 @@ import {
   nextDate,
 } from "./common/main";
 import { TrPipe } from './pipes/tr.pipe';
+import { LeftMenuComponent } from './modules/calendar-left-menu/left-menu/left-menu.component';
 
 @Component({
   selector: 'pro-calendar',
@@ -83,9 +84,7 @@ export class ProCalendarComponent implements OnInit, OnChanges {
   calendarEvents: WritableSignal<Appointment[]> = signal([]);
   configs: WritableSignal<Configs> = signal({});
 
-  /**
-   * Loading State
-   */
+  // Loading State
   calendarGotLoading = computed(() => {
     return this.loading || this.isLoading();
   });
@@ -99,12 +98,20 @@ export class ProCalendarComponent implements OnInit, OnChanges {
   // monthGenerator = monthGenerator;
   // getWeekInterval = getWeekInterval;
 
+  //TemplateRef
+  @ContentChild('loader') loaderRef!: TemplateRef<any>
+  @ContentChild('closeButton') closeButtonRef!: TemplateRef<any>
+  @ContentChild('searchIcon') searchIconRef!: TemplateRef<any>
+  @ContentChild('rightSwitchArrow') rightSwitchArrowRef!: TemplateRef<any>;
+  @ContentChild('leftSwitchArrow') leftSwitchArrowRef!: TemplateRef<any>;
+
+  @ViewChild('leftMenu') leftMenuChild!: LeftMenuComponent;
+
   constructor(
     private el: ElementRef,
     private storeService: StoreService,
     private trPipe: TrPipe
   ) {
-
     /**
      * watch dateSelected to change everything
      */
@@ -122,7 +129,7 @@ export class ProCalendarComponent implements OnInit, OnChanges {
       this.fetchAppointments();
     }, {
       allowSignalWrites: true
-    })
+    });
   };
   
   // display date selected on calendar-arrows
@@ -202,7 +209,7 @@ export class ProCalendarComponent implements OnInit, OnChanges {
    * fetch Appointments
    */
   fetchAppointments(): void {
-    // fetch appointments from server
+    // send event to fetch appointments from server
     this.fetchEvents.emit({
       start: dateToIsoString(
         fixDateTime(this.monthDates().start as Date, "00:00")

@@ -1,5 +1,5 @@
 <div
-    class="widget-calendar-wrapper relative w-full h-screen flex flex-row flex-nowrap bg-F4F6F9 min-h-screen"
+    class="widget-calendar-wrapper relative w-full h-screen flex flex-row flex-nowrap bg-white min-h-screen"
 >
     <!-- left menu-->
     <left-menu
@@ -8,22 +8,17 @@
       (calendarClose)="calendarClosed.emit()"
       #leftMenu
     >
-      <!-- slots -->
-      <ng-container loader>
-        <span #loaderSlot class="inline-flex">
-          <ng-content 
-            [attr.calendarGotLoading]="calendarGotLoading()" 
-            selector="[loader]"
-          >
-           <!---->
-          </ng-content>
-        </span>
+      <ng-template #loader>
+        <ng-container *ngTemplateOutlet="loaderRef; context:{'calendarGotLoading': calendarGotLoading()}"></ng-container>
         <!-- default loader -->
-        <ng-container *ngIf="!loaderSlot.children.length">
-          <loader-widget *ngIf="calendarGotLoading()" />
-        </ng-container>
-      </ng-container>
+        <loader-widget *ngIf="!loaderRef && calendarGotLoading()" />
+      </ng-template>
 
+      <ng-template #closeButton let-calendarClose="calendarClose">
+        <ng-container *ngTemplateOutlet="closeButtonRef; context:{'calendarClose':calendarClose}"></ng-container>
+        <!-- default close button -->
+        <close-button *ngIf="!closeButtonRef" (tap)="calendarClose.emit()" />
+      </ng-template>
     </left-menu>
 
     <!-- calendar base-->
@@ -34,9 +29,11 @@
       <header-comp>
         <!--Arrows-->
         <calendar-arrows
-          (left)="prevDate(dateSelected())"
-          (right)="nextDate(dateSelected())"
+          (left)="leftMenuChild.datepicked.set(prevDate(dateSelected()))"
+          (right)="leftMenuChild.datepicked.set(nextDate(dateSelected()))"
           [label]="getSelectedDateLabel"
+          [rightSwitchArrow]="rightSwitchArrowRef"
+          [leftSwitchArrow]="leftSwitchArrowRef"
         />
         <!-- DayToggle-->
         <view-toggle
@@ -48,6 +45,7 @@
         <calendar-search
           (typingFinish)="runSearch($event)"
           [placeholder]="configs().searchPlaceholder"
+          [searchIcon]="searchIconRef"
         />
       </header-comp>
       <!--calendar-->
@@ -56,15 +54,23 @@
         class="calendar-wrapper w-full mt-4 overflow-y-auto custom-scrll"
       >
         <!--calendar week-view-->
+        <ng-container *ngIf="defineView() === 'week'">
+          {{ defineView() }}
+        </ng-container>
         
 
         <!--calendar day-view-->
+        <ng-container *ngIf="defineView() === 'day'">
+          <day-view [dateSelected]="dateSelected()" [dayTimes]="dayTimes()" />
+        </ng-container>
 
         
         <!--calendar month-view-->
+        <ng-container *ngIf="defineView() === 'month'">
+          {{ defineView() }}
+        </ng-container>
         
       </div>
     </div>
 
-    <!---->
 </div>

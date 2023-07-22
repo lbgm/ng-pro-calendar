@@ -1,35 +1,25 @@
 <div class="w-full h-full p-4 pb-0">
     <!--closer and loader-->
     <div class="flex flex-row flex-wrap items-center justify-between">
-        <span 
-            #slotCloseButtton 
-            [ngClass]="{
-                'inline-flex': slotCloseButtton.children.length,
-                'hidden': !slotCloseButtton.children.length
-            }" 
-            (click)="calendarClose.emit()"
-        >
-            <ng-content selector="[closeButton]"></ng-content>
-        </span>
-
-        <ng-container *ngIf="!slotCloseButtton.children.length">
-            <close-button (tap)="calendarClose.emit()" />
-        </ng-container>
-
-        <ng-content selector="[loader]"></ng-content>
+        <!--close-button projection -->
+        <ng-container *ngTemplateOutlet="closeButtonRef; context:{'calendarClose':calendarClose}"></ng-container>
+        
+        <!-- loader projection-->
+        <ng-container *ngTemplateOutlet="loaderRef"></ng-container>
     </div>
     <!-- native date picker -->
-    <div *ngIf="configs()?.nativeDatepicker" class="mt-4">
+    <ng-container *ngIf="configs()?.nativeDatepicker">
         <native-datepicker
+            class="mt-4"
             #calendarDatePicker
             [value]="datepicked()"
             (changed)="datepicked.set($event)"
         />
-    </div>
+    </ng-container>
     <!-- date picker -->
-    <div *ngIf="!configs()?.nativeDatepicker" class="mt-4">
-        <!-- date picker -->
-    </div>
-    <!-- slot: ? side events -->
-    <ng-content selector="[sideEvent]"></ng-content>
+    <ng-container *ngIf="!configs()?.nativeDatepicker">
+        <!-- date picker class="mt-4" -->
+    </ng-container>
+    <!-- slot: ? side events | use sideEvent -->
+    <ng-container *ngTemplateOutlet="sideEventRef"></ng-container>
 </div>

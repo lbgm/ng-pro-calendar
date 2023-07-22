@@ -1,9 +1,9 @@
 :host {
-    @apply block;
+    @apply inline-block;
 }
 
 .primary-loader {
-    @apply w-4 h-4 border-2 rounded-full;
+    @apply inline-block flex-shrink-0 w-4 h-4 border-2 rounded-full;
     border-color: rgba(0, 0, 0, 0.1);
     border-top-color: rgb(14, 165, 233);
     -webkit-animation: spin 2s linear infinite;

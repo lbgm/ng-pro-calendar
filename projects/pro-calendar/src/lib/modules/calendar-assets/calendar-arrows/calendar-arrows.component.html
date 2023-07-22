@@ -7,19 +7,16 @@
         title="{{ 'previous_day' | tr }}"
     >
         <span 
-            #leftSwitchArrow 
-            [attr.data-left-switch-arrow]="leftSwitchArrow.children.length" 
             class="inline-flex flex-shrink-0"
         >
-            <ng-content select="[rightSwitchArrow]"></ng-content>
+            <ng-container *ngTemplateOutlet="leftSwitchArrowRef"></ng-container>
+            <!--default icon-->
+            <fa-icon 
+                *ngIf="!leftSwitchArrowRef" 
+                class="text-base text-18181B" 
+                icon="chevron-left"
+            />
         </span>
-        <!--default icon-->
-        <fa-icon 
-            *ngIf="!leftSwitchArrow.children.length" 
-            [attr.data-left-switch-arrow]="leftSwitchArrow.children.length" 
-            class="text-base text-18181B" 
-            icon="chevron-left"
-        />
     </a>
     <!-- label -->
     <!-- <span
@@ -36,18 +33,15 @@
         title="{{ 'next_day' | tr }}"
     >
         <span 
-            #rightSwitchArrow 
-            [attr.data-right-switch-arrow]="rightSwitchArrow.children.length" 
             class="inline-flex flex-shrink-0"
         >
-            <ng-content select="[rightSwitchArrow]"></ng-content>
+            <ng-container *ngTemplateOutlet="rightSwitchArrowRef"></ng-container>
+            <!--default icon-->
+            <fa-icon 
+                *ngIf="!rightSwitchArrowRef" 
+                class="text-base text-18181B" 
+                icon="chevron-right"
+            />
         </span>
-        <!--default icon-->
-        <fa-icon 
-            *ngIf="!rightSwitchArrow.children.length" 
-            [attr.data-right-switch-arrow]="rightSwitchArrow.children.length" 
-            class="text-base text-18181B" 
-            icon="chevron-right"
-        />
     </a>
 </div>

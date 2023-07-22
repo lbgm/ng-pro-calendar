@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, Signal, SimpleChanges, ViewChild, WritableSignal, computed, effect, signal } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { dateLabel } from '../../../common/main';
 import { TrPipe } from '../../../pipes/tr.pipe';
 
@@ -26,13 +26,13 @@ export class CalendarNativeDatepickerComponent implements OnInit, OnChanges {
 
   selectedDate: string = this.dateToString(this.value as Date);
 
-  displayDate: Signal<string> = computed(() => {
-    const _nd = new Date(signal(this.selectedDate)());
+  get displayDate (): string {
+    const _nd = new Date(this.selectedDate);
   
     return /calendar/i.test(dateLabel(_nd))
       ? this.trPipe.transform(dateLabel(_nd).split('.')[1])
       : dateLabel(_nd);
-  });
+  }
 
   constructor(private trPipe: TrPipe) { }
 

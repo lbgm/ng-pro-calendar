@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
 import { TrPipe } from '../../../pipes/tr.pipe';
 
 @Component({
@@ -15,5 +15,7 @@ export class CalendarSearchComponent {
 
   @Output('search') handleInput: EventEmitter<string> = new EventEmitter<string>();
   @Output() typingFinish: EventEmitter<string> = new EventEmitter<string>(); 
-  @Output() typingRun: EventEmitter<string> = new EventEmitter<string>(); 
+  @Output() typingRun: EventEmitter<string> = new EventEmitter<string>();
+
+  @Input() searchIcon!: TemplateRef<any>;
 }

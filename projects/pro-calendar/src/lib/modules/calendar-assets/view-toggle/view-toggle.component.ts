@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { E_View, T_View } from '../../../types/main';
 import { KeyValue } from '@angular/common';
 
@@ -10,7 +10,7 @@ import { KeyValue } from '@angular/common';
     './view-toggle.component.scss'
   ]
 })
-export class ViewToggleComponent implements OnInit, OnChanges {
+export class ViewToggleComponent implements OnInit {
   @Input() view?: T_View = "week";
 
   @Output() viewChanged: EventEmitter<T_View> = new EventEmitter<T_View>();
@@ -23,15 +23,13 @@ export class ViewToggleComponent implements OnInit, OnChanges {
     this.viewChanged.emit(this.view);
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    this.viewChanged.emit(this.view);
-  }
-
   changeView(state: T_View, event: Event): void {
     event.stopPropagation();
     event.preventDefault();
 
     this.view = state;
+
+    this.viewChanged.emit(this.view);
   };
 
   tracktab(index: number, tab: KeyValue<string, T_View>) {

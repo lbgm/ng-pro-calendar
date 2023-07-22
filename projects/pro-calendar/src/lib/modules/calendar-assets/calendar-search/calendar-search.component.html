@@ -4,17 +4,10 @@
     attr.aria-label="{{ 'search_tip' | tr }}"
   >
     <span class="inline-flex flex-whrink-0 select-none">
-        <span 
-            #searchIcon 
-            [attr.data-search-icon]="searchIcon.children.length" 
-            class="inline-flex flex-shrink-0"
-        >
-            <ng-content select="[searchIcon]"></ng-content>
-        </span>
+        <ng-container *ngTemplateOutlet="searchIcon"></ng-container>
         <!--default icon-->
         <fa-icon 
-            *ngIf="!searchIcon.children.length" 
-            [attr.data-search-icon]="searchIcon.children.length" 
+            *ngIf="!searchIcon" 
             class="text-base text-18181B" 
             icon="magnifying-glass"
         />

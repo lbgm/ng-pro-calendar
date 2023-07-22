@@ -5,14 +5,14 @@
 >
     <!-- selected date -->
     <span class="block p-2 text-09101D capitalize text-xs leading-4">
-        {{ selectedDate ? displayDate() : "YYYY-MM-AA" }}
+        {{ selectedDate ? displayDate : "YYYY-MM-AA" }}
     </span>
     <!--icon -->
     <fa-icon 
         class="text-base text-71717A mr-2" 
         icon="calendar"
     />
-    <!---->
+    <!-- input -->
     <input
         #dateinput
         name="pro-calendar-vue-datepicker"
