@@ -2,6 +2,7 @@
 
 <ng-template #noDirectLinkTemplate>
     <a
+        data-el-link
         href="#"
         class="underline inline-flex items-center font-medium text-2062F6 text-xs leading-relaxed hover:opacity-80 active:animate-pulse"
         (click)="clicked.emit()"
@@ -23,6 +24,7 @@
 
 <ng-template #directLinkTemplate>
     <a
+        data-el-link
         href="#"
         class="underline inline-flex items-center font-medium text-2062F6 text-xs leading-relaxed hover:opacity-80 active:animate-pulse"
     >

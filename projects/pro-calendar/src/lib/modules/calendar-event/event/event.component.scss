@@ -1,0 +1,49 @@
+:host {
+    @apply block;
+}
+
+.event-card {
+    background: rgba(14, 165, 233, 0.1);
+}
+
+.event-dot {
+    @apply relative left-1;
+    top: 2px;
+}
+
+.more-event-body,
+.single-event-popup {
+    margin-top: -16px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.more-event-body--item {
+    border-color: rgba(0, 0, 0, 0.15);
+}
+
+.more-event-body-item-dot {
+    @apply relative;
+    top: 2px;
+}
+
+.more-event-body--item:last-child {
+   @apply border-none
+}
+
+::ng-deep .calendar--event-report-action {
+    a[data-el-link] {
+        @apply text-E07A2C;
+    }
+}
+
+::ng-deep .calendar--event-view-action {
+    a[data-el-link] {
+        @apply text-0EA5E9;
+    }
+}
+
+::ng-deep .calendar--action {
+    a[data-el-link] {
+        @apply no-underline;
+    }
+}

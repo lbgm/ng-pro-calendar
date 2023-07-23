@@ -13,8 +13,8 @@ import { StoreService } from '../../../services/store.service';
 export class LeftMenuComponent implements OnInit, OnChanges {
   @Input() date?: Date | undefined = undefined;
 
-  @Output() calendarDatepicker: EventEmitter<Date> = new EventEmitter<Date>();
-  @Output() calendarClose: EventEmitter<void> = new EventEmitter<void>();
+  @Output() calendarDatepicker: EventEmitter<Date> = new EventEmitter<Date>(true);
+  @Output() calendarClose: EventEmitter<void> = new EventEmitter<void>(true);
 
   configs: WritableSignal<Configs> = signal({});
   dateRequested: WritableSignal<Date | undefined> = signal(this.date);
@@ -27,8 +27,6 @@ export class LeftMenuComponent implements OnInit, OnChanges {
   constructor(private storeService: StoreService) { 
     effect(() => {
       this.calendarDatepicker.emit(new Date(this.datepicked()));
-    }, {
-      allowSignalWrites: true
     });
   }
 
@@ -41,7 +39,10 @@ export class LeftMenuComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (this.dateRequested()) this.datepicked.set(this.dateRequested() as Date);
+    if (changes?.['date']?.currentValue) {
+      this.dateRequested.set(changes['date'].currentValue as unknown as Date);
+      this.datepicked.set(this.dateRequested() as Date);
+    }
   }
 
 }

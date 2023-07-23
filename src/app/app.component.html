@@ -1,4 +1,8 @@
-<pro-calendar>
+<pro-calendar 
+    date="2022-11-10T00:00:00.000Z"
+    [events]="evts"
+    [config]="cfg"
+>
     <!-- <ng-template let-calendarGotLoading="calendarGotLoading" #loader> -->
        <!-- content -->
     <!-- </ng-template> -->
@@ -17,5 +21,14 @@
 
     <!-- <ng-template let-calendarClose="calendarClose" #closeButton> -->
         <!-- calendarClose.emit() -->
+    <!-- </ng-template> -->
+
+    <!-- <ng-template let-date="date" let-time="time" let-cardEvent="cardEvent" #eventCard> -->
+        <!-- use this slot to show yourself calendar event in appearance you want -->
+        <!--
+        date: Date;
+        time: string;
+        cardEvent: Appointment[]; // events according to date/time
+        -->
     <!-- </ng-template> -->
 </pro-calendar>

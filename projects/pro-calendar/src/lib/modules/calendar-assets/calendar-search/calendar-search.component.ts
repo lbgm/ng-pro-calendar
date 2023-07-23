@@ -13,9 +13,9 @@ export class CalendarSearchComponent {
   @Input() placeholder?: string = "";
   @Input() timing?: number = 200;
 
-  @Output('search') handleInput: EventEmitter<string> = new EventEmitter<string>();
-  @Output() typingFinish: EventEmitter<string> = new EventEmitter<string>(); 
-  @Output() typingRun: EventEmitter<string> = new EventEmitter<string>();
+  @Output('search') handleInput: EventEmitter<string> = new EventEmitter<string>(true);
+  @Output() typingFinish: EventEmitter<string> = new EventEmitter<string>(true); 
+  @Output() typingRun: EventEmitter<string> = new EventEmitter<string>(true);
 
   @Input() searchIcon!: TemplateRef<any>;
 }

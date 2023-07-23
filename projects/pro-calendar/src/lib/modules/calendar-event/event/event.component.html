@@ -1,0 +1,181 @@
+<div
+    #eventContainer
+    [attr.data-date-start]="datetime_start()"
+    [attr.data-date-end]="datetime_end()"
+    [attr.data-evendate]="eventDate"
+    class="w-full"
+  >
+    <ng-container *ngTemplateOutlet="eventCardRef; context:{'date':eventDate,'time':eventTime,'cardEvent':RdvsPkg()}"></ng-container>
+    <!-- default view -->
+    <ng-container *ngIf="!eventCardRef">
+      <!-- event side -->
+      <div
+        #eventSide
+        data-widget-item="event--button"
+        class="cursor-pointer rounded event-card hover:opacity-80 active:animate-pulse calendar--event"
+        (click)="openEvtList()"
+      >
+        <!-- 1 event -->
+        <div
+          *ngIf="RdvsPkg().length === 1"
+          class="event-body select-none w-full p-0dt375"
+        >
+          <div class="single-event-inf">
+            <span
+              [attr.data-rdv-date]="RdvsPkg()[0].date"
+              [title]="isoStringToDate(RdvsPkg()[0].date).toLocaleString(lang)"
+              class="block text-left text-09101D font-medium text-xs calendar--event-time"
+            >
+              {{
+                timeFormat(
+                  hours(RdvsPkg()[0].date) + ':' + minutes(RdvsPkg()[0].date),
+                  true
+                )
+              }}
+              <!-- {{ hours(RdvsPkg[0].date) }}:{{ minutes(RdvsPkg[0].date) }} -->
+            </span>
+            <div class="font-semibold text-0EA5E9 text-sm leading-4">
+              <span
+                [title]="RdvsPkg()[0]?.comment ?? ''"
+                class="block text-left capitalize truncate calendar--event-name"
+              >
+                {{ RdvsPkg()[0].name }}
+              </span>
+              <span class="block truncate">
+                <span class="text-left text-1dt563 leading-4 event-dot calendar--event-dot">&#183;</span>
+                &nbsp;
+                <span
+                  class="text-left calendar--event-keyword text-A1A1AA font-normal"
+                >
+                  {{ RdvsPkg()[0].keywords }}
+                </span>
+              </span>
+            </div>
+          </div>
+        </div>
+        <!-- more than 1 event-->
+        <div
+          *ngIf="RdvsPkg().length > 1"
+          class="event-body select-none w-full p-0dt375"
+        >
+          <span
+            class="font-semibold text-0EA5E9 text-sm leading-4 block truncate text-left calendar--events-count"
+          >
+            {{ RdvsPkg().length }}&nbsp;{{ configs()?.eventName || ( "appointment" | tr ) }}
+          </span>
+        </div>
+      </div>
+
+      <!--------------------------------- popups zone ------------------------------->
+
+      <!-- single event popup -->
+      <div
+        #eventList
+        class="absolute z-one w-full bg-white rounded-lg p-3 flex flex-col single-event-popup space-y-2"
+        *ngIf="openSingleEvent() && actionsEnabled()"
+        [ngClass]="{ 'right-0': popupr(), 'bottom-full': popupb() }"
+      >
+        <!-- we use eventList here just to get popupr or popupb -->
+        <link-action
+          *ngIf="configs()?.viewEvent"
+          (click)="viewEvent(RdvsPkg()[0].id)"
+          class="calendar--event-view-action calendar--action"
+          [text]="configs()?.viewEvent?.text || ( 'view' | tr )"
+        >
+            <ng-template *ngIf="configs()?.viewEvent?.icon" #icon>
+                <fa-icon class="text-base text-0EA5E9" icon="eye" />
+            </ng-template>
+        </link-action>
+        <!---->
+        <link-action
+          *ngIf="configs()?.reportEvent"
+          (click)="reportEventFor(RdvsPkg()[0].id)"
+          [text]="configs()?.reportEvent?.text || ('report' | tr)"
+          class="calendar--event-report-action calendar--action"
+        >
+            <ng-template *ngIf="configs()?.reportEvent?.icon" #icon>
+                <fa-icon class="text-base text-E07A2C" icon="pen-nib" />
+            </ng-template>
+        </link-action>
+      </div>
+
+      <!-- more than one Event list popup -->
+      <div
+        #eventList
+        class="overflow-y-auto custom-scrll max-h-18dt75 absolute z-one min-w-24dt813 bg-white more-event-body rounded-lg p-3"
+        [ngClass]="{ 'right-0': popupr(), 'bottom-full': popupb() }"
+        *ngIf="openEventList()"
+      >
+        <!-- item -->
+        <div
+          class="group more-event-body--item flex flex-row flew-wrap space-x-4 p-2 bg-white border-b"
+          *ngFor="let rdv of RdvsPkg(); trackBy: trackRdv"
+        >
+          <!--event informations-->
+          <div
+            class="flex-grow flex flex-row space-x-2 flex-nowrap items-start"
+          >
+            <span class="more-event-body-item-dot block bg-3B82F6 h-3 w-3 opacity-20 group-hover:opacity-100 rounded-full flex-shrink-0">&thinsp;</span>
+            <div class="w-full grow flex-shrink more-event-body-item-body">
+              <!--title-->
+              <div class="font-semibold text-A1A1AA leading-4 text-0dt688">
+                <span
+                  [attr.data-rdv-date]="rdv.date"
+                  [title]="isoStringToDate(rdv.date).toLocaleString(lang)"
+                  class="calendar--event-time"
+                >
+                  {{
+                    timeFormat(hours(rdv.date) + ':' + minutes(rdv.date), true)
+                  }}
+                  <!-- {{ hours(rdv.date) }}:{{ minutes(rdv.date) }} -->
+                </span>
+              </div>
+              <!--name and engin-->
+              <div class="font-medium text-xs text-09101D">
+                <span
+                  [title]="rdv?.comment ?? ''"
+                  class="block capitalize calendar--event-name"
+                >
+                  {{ rdv.name }}
+                </span>
+                <!---->
+                <span
+                  class="block text-A1A1AA capitalize truncate calendar--event-keyword"
+                >
+                  {{ rdv.keywords }}
+                </span>
+              </div>
+            </div>
+          </div>
+          <!-- event actions -->
+          <div
+            *ngIf="actionsEnabled()"
+            class="flex flex-row space-x-4 flex-nowrap max-w-max items-center"
+          >
+            <link-action
+                *ngIf="configs()?.viewEvent"
+                (click)="viewEvent(rdv.id)"
+                class="calendar--event-view-action calendar--action"
+                [text]="configs()?.viewEvent?.text || ( 'view' | tr )"
+            >
+                <ng-template #icon>
+                    <fa-icon *ngIf="configs()?.viewEvent?.icon" class="text-base text-0EA5E9" icon="eye" />
+                </ng-template>
+            </link-action>
+            <!---->
+            <link-action
+                *ngIf="configs()?.reportEvent"
+                (click)="reportEventFor(rdv.id)"
+                [text]="configs()?.reportEvent?.text || ('report' | tr)"
+                class="calendar--event-report-action calendar--action"
+            >
+                <ng-template *ngIf="configs()?.reportEvent?.icon" #icon>
+                    <fa-icon class="text-base text-E07A2C" icon="pen-nib" />
+                </ng-template>
+            </link-action>
+          </div>
+        </div>
+      </div>
+      <!---->
+    </ng-container>
+</div>

@@ -13,7 +13,7 @@ import { KeyValue } from '@angular/common';
 export class ViewToggleComponent implements OnInit {
   @Input() view?: T_View = "week";
 
-  @Output() viewChanged: EventEmitter<T_View> = new EventEmitter<T_View>();
+  @Output() viewChanged: EventEmitter<T_View> = new EventEmitter<T_View>(true);
 
   tabs: Record<string, T_View> = {
     ...Object.fromEntries(Object.entries(E_View)),

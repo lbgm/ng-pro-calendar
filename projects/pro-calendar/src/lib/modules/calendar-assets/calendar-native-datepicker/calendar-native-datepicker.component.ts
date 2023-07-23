@@ -20,7 +20,7 @@ type CalendarDateInput = HTMLInputElement & {
 export class CalendarNativeDatepickerComponent implements OnInit, OnChanges {
   @Input() value?: Date = new Date();
 
-  @Output() changed: EventEmitter<Date> = new EventEmitter<Date>();
+  @Output() changed: EventEmitter<Date> = new EventEmitter<Date>(true);
 
   @ViewChild('dateinput') dateinput: ElementRef<HTMLInputElement> | undefined;
 
@@ -48,7 +48,9 @@ export class CalendarNativeDatepickerComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.selectedDate = this.dateToString(this.value as Date);
+    if(changes?.['value']?.currentValue) {
+      this.selectedDate = this.dateToString(changes['value'].currentValue as unknown as Date);
+    }
   }
 
 

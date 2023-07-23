@@ -13,8 +13,8 @@ import { Configs } from '../../../types/main';
 export class CalendarArrowsComponent implements OnInit {
   @Input() label?: string = "dd/mm/yyyy";
 
-  @Output() left: EventEmitter<void> = new EventEmitter<void>();
-  @Output() right: EventEmitter<void> = new EventEmitter<void>();
+  @Output() left: EventEmitter<void> = new EventEmitter<void>(true);
+  @Output() right: EventEmitter<void> = new EventEmitter<void>(true);
 
   @Input('leftSwitchArrow') leftSwitchArrowRef!: TemplateRef<any>;
   @Input('rightSwitchArrow') rightSwitchArrowRef!: TemplateRef<any>;

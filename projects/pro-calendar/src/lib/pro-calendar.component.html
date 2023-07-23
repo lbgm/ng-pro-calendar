@@ -3,10 +3,10 @@
 >
     <!-- left menu-->
     <left-menu
+      #leftMenu
       [date]="externalRequestDate()"
       (calendarDatepicker)="dateSelected.set($event)"
       (calendarClose)="calendarClosed.emit()"
-      #leftMenu
     >
       <ng-template #loader>
         <ng-container *ngTemplateOutlet="loaderRef; context:{'calendarGotLoading': calendarGotLoading()}"></ng-container>

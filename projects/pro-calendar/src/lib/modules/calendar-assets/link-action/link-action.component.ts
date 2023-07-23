@@ -13,7 +13,7 @@ export class LinkActionComponent {
   @Input() directLink?: boolean = false;
   @Input() iconmgl?: number = 2;
 
-  @Output() clicked: EventEmitter<void> = new EventEmitter<void>();
+  @Output() clicked: EventEmitter<void> = new EventEmitter<void>(true);
 
   @ContentChild('icon') iconRef!: TemplateRef<any>;
 }

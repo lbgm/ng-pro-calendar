@@ -9,7 +9,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
   ]
 })
 export class CloseButtonComponent {
-  @Output() tap = new EventEmitter<void>();
+  @Output() tap = new EventEmitter<void>(true);
 
   constructor () {}
 

@@ -9,8 +9,8 @@ export class InputTypingDirective {
   @Input() inputInterval?: number = 100;
   @Input() allowBackspace?: boolean = true;
 
-  @Output() run = new EventEmitter<Event>();
-  @Output() finish = new EventEmitter<Event>();
+  @Output() run = new EventEmitter<Event>(true);
+  @Output() finish = new EventEmitter<Event>(true);
 
   constructor(public el: ElementRef<HTMLInputElement>) { }
 

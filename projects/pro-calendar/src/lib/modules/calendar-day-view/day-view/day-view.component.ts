@@ -33,7 +33,9 @@ export class DayViewComponent implements OnChanges {
   timeFormat = timeFormat;
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (this.dateSelected) this.inDateView.set(this.dateSelected);
+    if (changes?.['dateSelected']?.currentValue) {
+      this.inDateView.set(changes['dateSelected'].currentValue as unknown as Date);
+    }
   }
 
   trackDayTimes(index: number, time: string): number {

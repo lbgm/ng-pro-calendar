@@ -1,4 +1,4 @@
-import { Component, ContentChild, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, Signal, SimpleChanges, TemplateRef, ViewChild, WritableSignal, computed, effect, signal } from '@angular/core';
+import { Component, ContentChild, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, TemplateRef, ViewChild, WritableSignal, computed, effect, signal } from '@angular/core';
 import { Appointment, Configs, IStartEndDates, T_View } from './types/main';
 import { StoreService } from './services/store.service';
 
@@ -57,9 +57,9 @@ export class ProCalendarComponent implements OnInit, OnChanges {
     nativeDatepicker: true,
   };
 
-  @Output() calendarClosed: EventEmitter<void> = new EventEmitter<void>();
+  @Output() calendarClosed: EventEmitter<void> = new EventEmitter<void>(true);
 
-  @Output() fetchEvents: EventEmitter<IStartEndDates> = new EventEmitter<IStartEndDates>();
+  @Output() fetchEvents: EventEmitter<IStartEndDates> = new EventEmitter<IStartEndDates>(true);
 
   dateSelected: WritableSignal<Date> = signal(new Date());
 
@@ -116,10 +116,11 @@ export class ProCalendarComponent implements OnInit, OnChanges {
      * watch dateSelected to change everything
      */
     effect(() => {
+      console.log('this.dateSelected()', this.dateSelected());
       //refresh week days'date
-      this.weekDays.set( weekGenerator(getWeekInterval(this.dateSelected())) );
+      this.weekDays.set(weekGenerator(getWeekInterval(this.dateSelected())));
       //refresh month days'date
-      this.monthDays.set( monthGenerator(this.dateSelected())._days );
+      this.monthDays.set(monthGenerator(this.dateSelected())._days);
       //month date start & end
       this.monthDates.set({
         start: monthGenerator(this.dateSelected()).firstDay,
@@ -130,8 +131,8 @@ export class ProCalendarComponent implements OnInit, OnChanges {
     }, {
       allowSignalWrites: true
     });
-  };
-  
+  }
+
   // display date selected on calendar-arrows
   get getSelectedDateLabel(): string {
     return /calendar/i.test(this.dateLabel(this.dateSelected())) ? this.trPipe.transform(this.dateLabel(this.dateSelected())) : dateLabel(this.dateSelected());
@@ -145,10 +146,10 @@ export class ProCalendarComponent implements OnInit, OnChanges {
     this.storeService.getEvents.subscribe((value: Appointment[]) => {
       this.calendarEvents.set(value);
     });
-    
+
     // generate day times
     this.generateDayTimes();
-    
+
     // boot with first props
     this.verifyFirstBind();
   }
@@ -157,9 +158,13 @@ export class ProCalendarComponent implements OnInit, OnChanges {
   // when props change ?
   ngOnChanges(changes: SimpleChanges): void {
     // events
-    this.storeService.setEvents = this.events as Appointment[];
+    if (changes?.['events']?.currentValue) {
+      this.storeService.setEvents = changes['events'].currentValue as unknown as Appointment[];
+    }
     // configs
-    this.storeService.setConfigs = this.config as Configs;
+    if (changes?.['config']?.currentValue) {
+      this.storeService.setConfigs = changes['config'].currentValue as unknown as Configs;
+    }
   }
 
   /**
