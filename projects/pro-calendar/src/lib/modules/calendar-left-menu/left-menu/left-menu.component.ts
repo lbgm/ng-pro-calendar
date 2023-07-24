@@ -31,7 +31,7 @@ export class LeftMenuComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    this.storeService.getConfigs.subscribe((value: Configs) => {
+    this.storeService._configs.subscribe((value: Configs) => {
        this.configs.set(value);
     });
 

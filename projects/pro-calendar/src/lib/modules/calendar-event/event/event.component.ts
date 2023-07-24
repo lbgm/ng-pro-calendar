@@ -1,8 +1,9 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit, Signal, TemplateRef, ViewChild, WritableSignal, computed, signal } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, Signal, TemplateRef, ViewChild, WritableSignal, computed, signal } from '@angular/core';
 import { StoreService } from '../../../services/store.service';
 import { Appointment, Configs } from '../../../types/main';
 import { fixDateTime, hours, incrementTime, isoStringToDate, minutes, timeFormat } from '../../../common/main';
 import { TranslateService } from '../../../services/translate.service';
+import { UtilitiesService } from '../../../services/utilities.service';
 
 @Component({
   selector: 'event',
@@ -53,31 +54,27 @@ export class EventComponent implements OnInit {
 
   constructor(
     private storeService: StoreService,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private utilitiesService: UtilitiesService,
+    private el: ElementRef
   ) { }
 
   ngOnInit(): void {
     // subscribe configs
-    this.storeService.getConfigs.subscribe((value: Configs) => {
+    this.storeService._configs.subscribe((value: Configs) => {
       this.configs.set(value);
     });
-    
+
     //subscribe events
-    this.storeService.getEvents.subscribe((value: Appointment[]) => {
+    this.storeService._events.subscribe((value: Appointment[]) => {
       this.calendarEvents.set(value);
     });
-    
-    // popover control
-    document.addEventListener("click", (event) => {
-      if (
-        this.eventContainer?.nativeElement &&
-        !(this.eventContainer?.nativeElement as HTMLElement).contains(
-          event.target as Node | null
-        )
-      ) {
-        this.closeEventList();
-      }
-    });
+
+    // utilitiesService
+    this.utilitiesService._documentClickTarget.subscribe((value: EventTarget | null) => {
+      if(value) this.handleOutsideClick(value as EventTarget);
+    })
+
     // transform props binding to datetime
     this.datetime_start.set(fixDateTime(this.eventDate as Date, this.eventTime as string));
     this.datetime_end.set(fixDateTime(
@@ -86,6 +83,18 @@ export class EventComponent implements OnInit {
     ));
     // filt events
     this.eventEvents();
+  }
+
+  handleOutsideClick(target: EventTarget): void {
+    // popover control
+    if (
+      this.eventContainer?.nativeElement &&
+      !(this.eventContainer?.nativeElement as HTMLElement).contains(
+        target as Node | null
+      )
+    ) {
+      this.closeEventList();
+    }
   }
 
   closeEventList(): void {

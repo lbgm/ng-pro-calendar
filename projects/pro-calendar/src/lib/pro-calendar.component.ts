@@ -1,4 +1,4 @@
-import { Component, ContentChild, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, TemplateRef, ViewChild, WritableSignal, computed, effect, signal } from '@angular/core';
+import { Component, ContentChild, ElementRef, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, SimpleChanges, TemplateRef, ViewChild, WritableSignal, computed, effect, signal } from '@angular/core';
 import { Appointment, Configs, IStartEndDates, T_View } from './types/main';
 import { StoreService } from './services/store.service';
 
@@ -20,6 +20,7 @@ import {
 } from "./common/main";
 import { TrPipe } from './pipes/tr.pipe';
 import { LeftMenuComponent } from './modules/calendar-left-menu/left-menu/left-menu.component';
+import { UtilitiesService } from './services/utilities.service';
 
 @Component({
   selector: 'pro-calendar',
@@ -110,6 +111,7 @@ export class ProCalendarComponent implements OnInit, OnChanges {
   constructor(
     private el: ElementRef,
     private storeService: StoreService,
+    private utilitiesService: UtilitiesService,
     private trPipe: TrPipe
   ) {
     /**
@@ -139,11 +141,11 @@ export class ProCalendarComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    this.storeService.getConfigs.subscribe((value: Configs) => {
+    this.storeService._configs.subscribe((value: Configs) => {
       this.configs.set(value);
     });
 
-    this.storeService.getEvents.subscribe((value: Appointment[]) => {
+    this.storeService._events.subscribe((value: Appointment[]) => {
       this.calendarEvents.set(value);
     });
 
@@ -159,11 +161,11 @@ export class ProCalendarComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     // events
     if (changes?.['events']?.currentValue) {
-      this.storeService.setEvents = changes['events'].currentValue as unknown as Appointment[];
+      this.storeService.$events = changes['events'].currentValue as unknown as Appointment[];
     }
     // configs
     if (changes?.['config']?.currentValue) {
-      this.storeService.setConfigs = changes['config'].currentValue as unknown as Configs;
+      this.storeService.$configs = changes['config'].currentValue as unknown as Configs;
     }
   }
 
@@ -177,7 +179,7 @@ export class ProCalendarComponent implements OnInit, OnChanges {
     let _search = [];
     //
     if (!value.replace(/\s/g, "").length) {
-      this.storeService.setEvents = this.events as Appointment[];
+      this.storeService.$events = this.events as Appointment[];
       return void 0;
     }
     //
@@ -190,7 +192,7 @@ export class ProCalendarComponent implements OnInit, OnChanges {
       }
     });
     this.isLoading.set(false);
-    if (_search.length !== 0) this.storeService.setEvents = _search;
+    if (_search.length !== 0) this.storeService.$events = _search;
   }
 
   /**
@@ -237,9 +239,13 @@ export class ProCalendarComponent implements OnInit, OnChanges {
     }
 
     // events
-    this.storeService.setEvents = this.events as Appointment[];
+    this.storeService.$events = this.events as Appointment[];
     // config
-    this.storeService.setConfigs = this.config as Configs;
-  };
+    this.storeService.$configs = this.config as Configs;
+  }
 
+  @HostListener("document:click", ["$event"])
+  documentClickTarget(event: Event): void {
+    this.utilitiesService.$documentClickTarget = event.target as EventTarget;
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, TemplateRef, WritableSignal, signal } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, TemplateRef, WritableSignal, signal } from '@angular/core';
 import { StoreService } from '../../../services/store.service';
 import { Configs } from '../../../types/main';
 
@@ -24,7 +24,7 @@ export class CalendarArrowsComponent implements OnInit {
   constructor(private storeService: StoreService) { }
 
   ngOnInit(): void {
-    this.storeService.getConfigs.subscribe((value: Configs) => {
+    this.storeService._configs.subscribe((value: Configs) => {
        this.configs.set(value);
     });
   }

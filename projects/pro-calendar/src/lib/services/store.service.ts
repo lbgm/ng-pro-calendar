@@ -26,19 +26,19 @@ export class StoreService {
 
   constructor() { }
 
-  get getEvents(): Observable<Appointment[]> {
+  get _events(): Observable<Appointment[]> {
     return this.#events.asObservable();
   }
 
-  get getConfigs(): Observable<Configs> {
+  get _configs(): Observable<Configs> {
     return this.#configs.asObservable();
   }
 
-  set setEvents(newValue: Appointment[]) {
+  set $events(newValue: Appointment[]) {
     this.#events.next(newValue);
   }
 
-  set setConfigs(newValue: Configs) {
+  set $configs(newValue: Configs) {
     this.#configs.next(newValue);
   }
 }
