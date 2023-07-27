@@ -3,15 +3,13 @@
   "version": "0.0.1",
   "description": "Professional Calendar for Angular",
   "keywords": [
-    "Angular 16+",
-    "Angular",
-    "pro calendar",
+    "angular",
+    "calendar",
     "typescript",
     "lbgm",
-    "Angular library",
+    "angular library",
     "calendar",
-    "professional",
-    "professional calendar"
+    "professional"
   ],
   "engines": {
     "node": ">=16.20.0",
