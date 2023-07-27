@@ -184,7 +184,7 @@ export class ProCalendarComponent implements OnInit, OnChanges {
     }
     //
     this.isLoading.set(true);
-    _search = this.calendarEvents().filter((rdv: any) => {
+    _search = this.calendarEvents().filter((rdv: Appointment) => {
       try {
         return _s.test(`${rdv.name}`) || _s.test(`${rdv.keywords}`);
       } catch (e) {

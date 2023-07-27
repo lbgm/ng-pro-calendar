@@ -7,10 +7,10 @@ import { TranslateService } from '../services/translate.service';
 })
 export class TrPipe implements PipeTransform {
 
-  constructor (private translateService: TranslateService) {}
+  constructor(private translateService: TranslateService) { }
 
-  transform(value: string, locale?: string): string{
-    return this.translateService.translate(value, locale);
+  transform(value: string, args?: Record<string, string>): string {
+    return this.translateService.translate(value, args);
   }
 
 }

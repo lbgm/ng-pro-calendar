@@ -78,6 +78,7 @@ module.exports = {
       "0EA5E9": "#0EA5E9",
       "0369A1": "#0369A1",
       EFF6FF: "#eff6ff",
+      "black-0p1": "rgba(0,0,0,0.1)"
     },
   },
   plugins: [],

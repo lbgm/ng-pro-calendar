@@ -1,3 +1,66 @@
 :host {
     @apply grow w-full h-full max-w-20rm flex-shrink-0;
 }
+
+/**
+* mat-date-picker
+*/
+::ng-deep .mat-focused .mat-form-field-label {
+    /*change color of label*/
+    @apply text-09101D;
+}
+
+::ng-deep.mat-form-field-underline {
+    /*change color of underline*/
+    @apply bg-white;
+}
+
+::ng-deep.mat-form-field-ripple {
+    /*change color of underline when focused*/
+    @apply bg-white;
+}
+
+::ng-deep .mat-form-field-label {
+    /*change color of label*/
+    @apply text-09101D;
+}
+
+::ng-deep .mat-datepicker-toggle {
+    @apply text-71717A;
+}
+
+::ng-deep .mat-calendar-body-selected {
+    @apply text-09101D;
+    @apply bg-black-0p1;
+}
+
+::ng-deep .mat-calendar-body-today:not(.mat-calendar-body-selected) {
+    @apply border-09101D;
+}
+
+::ng-deep .mat-datepicker-input {
+
+    &.mdc-text-field--disabled,
+    &.mdc-text-field__input {
+        @apply text-09101D;
+        opacity: 0.7;
+    }
+}
+
+::ng-deep .mdc-text-field {
+
+    &.mdc-text-field--filled,
+    &.mdc-text-field--disabled {
+        @apply bg-white;
+    }
+
+    .mdc-line-ripple {
+        &::before {
+            border-bottom-width: 2px;
+        }
+    }
+}
+
+.mat-input-element {
+    @apply text-09101D;
+}

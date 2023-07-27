@@ -61,7 +61,7 @@
           <span
             class="font-semibold text-0EA5E9 text-sm leading-4 block truncate text-left calendar--events-count"
           >
-            {{ RdvsPkg().length }}&nbsp;{{ configs()?.eventName || ( "appointment" | tr ) }}
+            {{ RdvsPkg().length }}&nbsp;{{ configs().eventName || ( "appointment" | tr: { add: "s" } ) }}
           </span>
         </div>
       </div>
@@ -80,7 +80,7 @@
           *ngIf="configs()?.viewEvent"
           (click)="viewEvent(RdvsPkg()[0].id)"
           class="calendar--event-view-action calendar--action"
-          [text]="configs()?.viewEvent?.text || ( 'view' | tr )"
+          [text]="configs().viewEvent?.text || ( 'view' | tr )"
         >
             <ng-template *ngIf="configs()?.viewEvent?.icon" #icon>
                 <fa-icon class="text-base text-0EA5E9" icon="eye" />
@@ -90,7 +90,7 @@
         <link-action
           *ngIf="configs()?.reportEvent"
           (click)="reportEventFor(RdvsPkg()[0].id)"
-          [text]="configs()?.reportEvent?.text || ('report' | tr)"
+          [text]="configs().reportEvent?.text || ('report' | tr)"
           class="calendar--event-report-action calendar--action"
         >
             <ng-template *ngIf="configs()?.reportEvent?.icon" #icon>
@@ -156,7 +156,7 @@
                 *ngIf="configs()?.viewEvent"
                 (click)="viewEvent(rdv.id)"
                 class="calendar--event-view-action calendar--action"
-                [text]="configs()?.viewEvent?.text || ( 'view' | tr )"
+                [text]="configs().viewEvent?.text || ( 'view' | tr )"
             >
                 <ng-template #icon>
                     <fa-icon *ngIf="configs()?.viewEvent?.icon" class="text-base text-0EA5E9" icon="eye" />
@@ -166,7 +166,7 @@
             <link-action
                 *ngIf="configs()?.reportEvent"
                 (click)="reportEventFor(rdv.id)"
-                [text]="configs()?.reportEvent?.text || ('report' | tr)"
+                [text]="configs().reportEvent?.text || ('report' | tr)"
                 class="calendar--event-report-action calendar--action"
             >
                 <ng-template *ngIf="configs()?.reportEvent?.icon" #icon>

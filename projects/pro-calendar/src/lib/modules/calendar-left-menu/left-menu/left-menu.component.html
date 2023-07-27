@@ -18,7 +18,29 @@
     </ng-container>
     <!-- date picker -->
     <ng-container *ngIf="!configs()?.nativeDatepicker">
-        <!-- date picker class="mt-4" -->
+        <mat-form-field class="mt-4">
+            <input 
+                matInput 
+                [matDatepicker]="calendarMatDatepicker" 
+                placeholder="YYYY-MM-AA"
+                [value]="datepicked()"
+                (dateChange)="dateSelected($event)"
+                disabled
+            >
+            <mat-datepicker-toggle 
+                [disableRipple]="true" 
+                tabindex="-1" 
+                matSuffix
+                [for]="calendarMatDatepicker"
+            >
+                <fa-icon
+                    matDatepickerToggleIcon
+                    class="text-xs text-71717A" 
+                    icon="calendar"
+                />
+            </mat-datepicker-toggle>
+            <mat-datepicker #calendarMatDatepicker disabled="false"></mat-datepicker>
+        </mat-form-field>
     </ng-container>
     <!-- slot: ? side events | use sideEvent -->
     <ng-container *ngTemplateOutlet="sideEventRef"></ng-container>

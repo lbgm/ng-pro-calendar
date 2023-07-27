@@ -1,6 +1,9 @@
 import { Component, ContentChild, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, TemplateRef, WritableSignal, effect, signal } from '@angular/core';
 import { Configs } from '../../../types/main';
 import { StoreService } from '../../../services/store.service';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { DateAdapter } from '@angular/material/core';
+import { TranslateService } from '../../../services/translate.service';
 
 @Component({
   selector: 'left-menu',
@@ -24,7 +27,14 @@ export class LeftMenuComponent implements OnInit, OnChanges {
   @ContentChild('sideEvent') sideEventRef!: TemplateRef<any>;
   @ContentChild('closeButton') closeButtonRef!: TemplateRef<any>;
 
-  constructor(private storeService: StoreService) { 
+  constructor(
+    private storeService: StoreService,
+    private translateService: TranslateService,
+    private _adapter: DateAdapter<any>
+  ) {
+    // set locale for datepickers
+    this._adapter.setLocale(this.translateService.lang);
+
     effect(() => {
       this.calendarDatepicker.emit(new Date(this.datepicked()));
     });
@@ -32,10 +42,10 @@ export class LeftMenuComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.storeService._configs.subscribe((value: Configs) => {
-       this.configs.set(value);
+      this.configs.set(value);
     });
 
-    this.calendarDatepicker.emit( new Date(this.datepicked()) );
+    this.calendarDatepicker.emit(new Date(this.datepicked()));
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -43,6 +53,10 @@ export class LeftMenuComponent implements OnInit, OnChanges {
       this.dateRequested.set(changes['date'].currentValue as unknown as Date);
       this.datepicked.set(this.dateRequested() as Date);
     }
+  }
+
+  dateSelected(event: MatDatepickerInputEvent<Date>): void {
+    if (event.value) this.datepicked.set(event.value);
   }
 
 }
