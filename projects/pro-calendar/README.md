@@ -2,6 +2,16 @@
 
 Professional Calendar for Angular
 > Angular 16+
+- [Pro Calendar](#pro-calendar)
+  - [Install](#install)
+  - [Screenshot with Native Datepicker](#screenshot-with-native-datepicker)
+  - [Screenshot with Material Datepicker](#screenshot-with-material-datepicker)
+  - [Use](#use)
+  - [Props \& Types](#props--types)
+  - [Events](#events)
+  - [Slots](#slots)
+  - [Custom HTML Events fired](#custom-html-events-fired)
+  - [Support me ?](#support-me-)
 
 ## Install
 
