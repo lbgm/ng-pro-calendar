@@ -571,6 +571,10 @@ video {
   margin-right: 1px;
 }
 
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+
 .mr-1 {
   margin-right: 0.25rem;
 }
@@ -581,6 +585,10 @@ video {
 
 .mt-1 {
   margin-top: 0.25rem;
+}
+
+.mt-1dt125 {
+  margin-top: 1.125rem;
 }
 
 .mt-4 {
@@ -665,6 +673,10 @@ video {
 
 .min-w-24dt813 {
   min-width: 24.813rem;
+}
+
+.max-w-50p {
+  max-width: 50%;
 }
 
 .max-w-max {
@@ -881,6 +893,10 @@ video {
   padding: 0.375rem;
 }
 
+.p-1 {
+  padding: 0.25rem;
+}
+
 .p-2 {
   padding: 0.5rem;
 }
@@ -926,6 +942,10 @@ video {
   padding-bottom: 1rem;
 }
 
+.pr-4 {
+  padding-right: 1rem;
+}
+
 .pt-1 {
   padding-top: 0.25rem;
 }
@@ -948,6 +968,10 @@ video {
 
 .text-0dt688 {
   font-size: 0.688rem;
+}
+
+.text-0dt813 {
+  font-size: 0.813rem;
 }
 
 .text-1dt375 {
@@ -1107,47 +1131,45 @@ video {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
-@media screen and (-webkit-min-device-pixel-ratio:0)/*chrome*/
-{
-  .custom-scrll::-webkit-scrollbar
+@media screen and (-webkit-min-device-pixel-ratio:0)
+
+/*chrome*/
   {
-    width:6px;
-    height:6px;
+  .custom-scrll::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
   }
 
-  .custom-scrll::-webkit-scrollbar-track
-  {
-    background:transparent;
+  .custom-scrll::-webkit-scrollbar-track {
+    background: transparent;
   }
 
-  .custom-scrll::-webkit-scrollbar-thumb
-  {
-    border-radius:6px;
+  .custom-scrll::-webkit-scrollbar-thumb {
+    border-radius: 6px;
     background: rgba(14, 165, 233, .8);
-    border:0;
+    border: 0;
     display: none;
   }
 
-  .custom-scrll:hover
-  {
-    &.custom-scrll::-webkit-scrollbar-thumb{
+  .custom-scrll:hover {
+    &.custom-scrll::-webkit-scrollbar-thumb {
       display: initial;
     }
   }
 
-  .custom-scrll::-webkit-scrollbar-corner
-  {
-    display:none;
+  .custom-scrll::-webkit-scrollbar-corner {
+    display: none;
   }
 }
 
-@-moz-document url-prefix()/*firefox*/
-{
-  .custom-scrll
+@-moz-document url-prefix()
+
+/*firefox*/
   {
+  .custom-scrll {
     scrollbar-color: rgba(14, 165, 233, .8) transparent;
     scrollbar-width: none;
-    &:hover{
+    &:hover {
       scrollbar-width: thin;
     }
   }

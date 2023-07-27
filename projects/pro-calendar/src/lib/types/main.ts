@@ -4,6 +4,11 @@ export enum E_View {
     MONTH = "month",
 }
 
+export enum E_CustomEvents {
+    VIEW = 'calendar.request.view',
+    REPORT = 'calendar.request.report'
+}
+
 export type Appointment = {
     id: string;
     name: string;

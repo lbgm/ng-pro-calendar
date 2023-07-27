@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Appointment, Configs } from 'pro-calendar';
+import { Appointment, Configs, E_CustomEvents } from 'pro-calendar';
 
 @Component({
   selector: 'app-root',
@@ -60,7 +60,7 @@ export class AppComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    ["calendar.request.view", "calendar.request.report"].forEach((e: string) => {
+    [E_CustomEvents.VIEW, E_CustomEvents.REPORT].forEach((e: string) => {
       document.body.addEventListener(e, (event: Event | CustomEvent) => {
         console.log({ event });
       });

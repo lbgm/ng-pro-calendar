@@ -1,6 +1,6 @@
 import { Component, ElementRef, Input, OnInit, Signal, TemplateRef, ViewChild, WritableSignal, computed, signal } from '@angular/core';
 import { StoreService } from '../../../services/store.service';
-import { Appointment, Configs } from '../../../types/main';
+import { Appointment, Configs, E_CustomEvents } from '../../../types/main';
 import { fixDateTime, hours, incrementTime, isoStringToDate, minutes, timeFormat } from '../../../common/main';
 import { TranslateService } from '../../../services/translate.service';
 import { UtilitiesService } from '../../../services/utilities.service';
@@ -129,7 +129,7 @@ export class EventComponent implements OnInit {
   }
 
   viewEvent(id: string | number | unknown): void {
-    const event = new CustomEvent("calendar.request.view", {
+    const event = new CustomEvent(E_CustomEvents.VIEW, {
       detail: { id },
     });
     document.body.dispatchEvent(event);
@@ -137,7 +137,7 @@ export class EventComponent implements OnInit {
   };
 
   reportEventFor(id: string | number | unknown): void {
-    const event = new CustomEvent("calendar.request.report", {
+    const event = new CustomEvent(E_CustomEvents.REPORT, {
       detail: { id },
     });
     document.body.dispatchEvent(event);

@@ -19,6 +19,23 @@
         <!-- default close button -->
         <close-button *ngIf="!closeButtonRef" (tap)="calendarClose.emit()" />
       </ng-template>
+
+      <ng-template #sideEvent>
+        <div
+          class="side-event-box overflow-y-auto custom-scrll p-1"
+          [ngClass]="{
+            'below-mat-datepicker': !configs().nativeDatepicker,
+            'below-native-datepicker': configs().nativeDatepicker,
+          }"
+        >
+          <ng-container *ngTemplateOutlet="sideEventRef; context:{'calendarEvents':calendarEvents(),'dateSelected':dateSelected()}"></ng-container>
+          <ng-container *ngIf="!sideEventRef">
+            <side-event [eventDate]="dateSelected()" />
+            <!--_-->
+            <side-event [eventDate]="nextDate(dateSelected())" />
+          </ng-container>
+        </div>
+      </ng-template>
     </left-menu>
 
     <!-- calendar base-->

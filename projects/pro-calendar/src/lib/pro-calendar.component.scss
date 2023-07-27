@@ -7,7 +7,9 @@
 }
 
 .side-event-box {
-    &.below-native-datepicker {
+
+    &.below-native-datepicker,
+    &.below-mat-datepicker {
         height: calc(100% - 92px);
     }
 }

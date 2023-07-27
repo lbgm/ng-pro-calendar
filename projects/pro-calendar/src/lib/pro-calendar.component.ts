@@ -93,11 +93,6 @@ export class ProCalendarComponent implements OnInit, OnChanges {
   dateLabel = dateLabel;
   prevDate = prevDate;
   nextDate = nextDate;
-  // dateToIsoString = dateToIsoString;
-  // fixDateTime = fixDateTime;
-  // weekGenerator = weekGenerator;
-  // monthGenerator = monthGenerator;
-  // getWeekInterval = getWeekInterval;
 
   //TemplateRef
   @ContentChild('loader') loaderRef!: TemplateRef<any>
@@ -105,6 +100,7 @@ export class ProCalendarComponent implements OnInit, OnChanges {
   @ContentChild('searchIcon') searchIconRef!: TemplateRef<any>
   @ContentChild('rightSwitchArrow') rightSwitchArrowRef!: TemplateRef<any>;
   @ContentChild('leftSwitchArrow') leftSwitchArrowRef!: TemplateRef<any>;
+  @ContentChild('sideEvent') sideEventRef!: TemplateRef<any>;
 
   @ViewChild('leftMenu') leftMenuChild!: LeftMenuComponent;
 
@@ -118,7 +114,6 @@ export class ProCalendarComponent implements OnInit, OnChanges {
      * watch dateSelected to change everything
      */
     effect(() => {
-      console.log('this.dateSelected()', this.dateSelected());
       //refresh week days'date
       this.weekDays.set(weekGenerator(getWeekInterval(this.dateSelected())));
       //refresh month days'date
