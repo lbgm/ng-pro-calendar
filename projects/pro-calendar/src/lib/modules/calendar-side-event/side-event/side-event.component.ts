@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild, WritableSignal, effect, signal } from '@angular/core';
+import { Component, ElementRef, Input, OnChanges, OnInit, Signal, SimpleChanges, ViewChild, WritableSignal, computed, effect, signal } from '@angular/core';
 import { Appointment, E_CustomEvents } from '../../../types/main';
 import { StoreService } from '../../../services/store.service';
 import { TranslateService } from '../../../services/translate.service';
@@ -26,7 +26,15 @@ export class SideEventComponent implements OnInit, OnChanges {
   datetime_end: WritableSignal<Date | null> = signal(null);
 
   calendarEvents: WritableSignal<Appointment[]> = signal([]);
-  RdvsPkg: WritableSignal<Appointment[]> = signal([]);
+  RdvsPkg: Signal<Appointment[]> = computed((): Appointment[] => {
+    const start = this.datetime_start() as Date;
+    const end = this.datetime_end() as Date;
+
+    return this.calendarEvents().filter((rdv: Appointment) => {
+      const d = isoStringToDate(rdv.date);
+      return d >= start && d < end;
+    });
+  });
 
   timeFormat = timeFormat;
   hours = hours;
@@ -56,32 +64,19 @@ export class SideEventComponent implements OnInit, OnChanges {
       this.calendarEvents.set(value);
     });
 
-    this.build();
+    this.setDatetime();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes?.['eventDate']?.currentValue) {
-      this.build();
+      this.setDatetime();
     }
   }
 
-  build(): void {
+  setDatetime(): void {
     // transform props binding to datetime
     this.datetime_start.set(fixDateTime(this.eventDate as Date, ""));
     this.datetime_end.set(fixDateTime(this.eventDate as Date, incrementTime("")));
-    // filt events
-    this.eventEvents();
-  }
-
-  //filt and Retrieve <Event /> data
-  eventEvents(): void {
-    const start = this.datetime_start() as Date;
-    const end = this.datetime_end() as Date;
-
-    this.RdvsPkg.set(this.calendarEvents().filter((rdv: Appointment) => {
-      const d = isoStringToDate(rdv.date);
-      return d >= start && d < end;
-    }));
   }
 
   viewEvent(id: string | number | unknown): void {

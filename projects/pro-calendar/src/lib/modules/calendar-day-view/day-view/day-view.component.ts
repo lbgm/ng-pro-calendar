@@ -17,26 +17,13 @@ import {
     './day-view.component.scss'
   ]
 })
-export class DayViewComponent implements OnChanges {
+export class DayViewComponent {
   @Input() dateSelected!: Date;
   @Input() dayTimes: string[] = [];
   @Input('eventCard') eventCardRef!: TemplateRef<any>;
 
-  inDateView: WritableSignal<Date> = signal(this.dateSelected);
-
-  twoDigitTime = twoDigitTime;
-  incrementTime = incrementTime;
-  fixDateTime = fixDateTime;
-  randomId = randomId;
   dayName = dayName;
-  copyDate = copyDate;
   timeFormat = timeFormat;
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes?.['dateSelected']?.currentValue) {
-      this.inDateView.set(changes['dateSelected'].currentValue as unknown as Date);
-    }
-  }
 
   trackDayTimes(index: number, time: string): number {
     return index;

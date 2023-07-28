@@ -14,11 +14,11 @@
         <span
           class="block text-71717A font-bold text-0dt625 leading-3 uppercase"
         >
-          {{ dayName(inDateView(), inDateView().getDate()).slice(0, -1) }}
+          {{ dayName(dateSelected, dateSelected.getDate()).slice(0, -1) }}
         </span>
         <!--daynumber-->
         <span class="block text-black font-medium text-1dt375 leading-8">
-            {{ inDateView().getDate() }}
+            {{ dateSelected.getDate() }}
         </span>
       </div>
       <!--time-column-cell-->
@@ -37,7 +37,7 @@
       </div>
       <!--day-row-cell-->
       <div
-        *ngFor="let day of [inDateView()]; trackBy: trackDayView;"
+        *ngFor="let day of [dateSelected]; trackBy: trackDayView;"
         class="relative select-none day-cell w-full text-left border-b border-E0E0E0"
       >
         <!-- events are here -->
@@ -46,7 +46,7 @@
         <!-- event component -->
         <event
           class="absolute top-0"
-          [eventDate]="inDateView()"
+          [eventDate]="dateSelected"
           [eventTime]="time"
           [eventCard]="eventCardRef"
         />

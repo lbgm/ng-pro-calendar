@@ -79,16 +79,11 @@ export class ProCalendarComponent implements OnInit, OnChanges {
     end: "",
   });
 
-  isLoading: WritableSignal<boolean> = signal(false);
+  isLoading: WritableSignal<boolean> = signal(this.loading as boolean);
 
   // store
   calendarEvents: WritableSignal<Appointment[]> = signal([]);
   configs: WritableSignal<Configs> = signal({});
-
-  // Loading State
-  calendarGotLoading = computed(() => {
-    return this.loading || this.isLoading();
-  });
 
   dateLabel = dateLabel;
   prevDate = prevDate;
@@ -101,6 +96,7 @@ export class ProCalendarComponent implements OnInit, OnChanges {
   @ContentChild('rightSwitchArrow') rightSwitchArrowRef!: TemplateRef<any>;
   @ContentChild('leftSwitchArrow') leftSwitchArrowRef!: TemplateRef<any>;
   @ContentChild('sideEvent') sideEventRef!: TemplateRef<any>;
+  @ContentChild('eventCard') eventCardRef!: TemplateRef<any>;
 
   @ViewChild('leftMenu') leftMenuChild!: LeftMenuComponent;
 
@@ -161,6 +157,10 @@ export class ProCalendarComponent implements OnInit, OnChanges {
     // configs
     if (changes?.['config']?.currentValue) {
       this.storeService.$configs = changes['config'].currentValue as unknown as Configs;
+    }
+    // loading
+    if (changes?.['loading']?.currentValue) {
+      this.isLoading.set(changes['loading'].currentValue as unknown as boolean);
     }
   }
 

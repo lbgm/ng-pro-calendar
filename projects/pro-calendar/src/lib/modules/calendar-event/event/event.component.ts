@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, Signal, TemplateRef, ViewChild, WritableSignal, computed, signal } from '@angular/core';
+import { Component, ElementRef, Input, OnChanges, OnInit, Signal, SimpleChanges, TemplateRef, ViewChild, WritableSignal, computed, signal } from '@angular/core';
 import { StoreService } from '../../../services/store.service';
 import { Appointment, Configs, E_CustomEvents } from '../../../types/main';
 import { fixDateTime, hours, incrementTime, isoStringToDate, minutes, timeFormat } from '../../../common/main';
@@ -13,7 +13,7 @@ import { UtilitiesService } from '../../../services/utilities.service';
     './event.component.scss'
   ]
 })
-export class EventComponent implements OnInit {
+export class EventComponent implements OnInit, OnChanges {
   @Input() eventDate!: Date;
   @Input() eventTime?: string = "";
   @Input('eventCard') eventCardRef!: TemplateRef<any>;
@@ -34,7 +34,15 @@ export class EventComponent implements OnInit {
 
   configs: WritableSignal<Configs> = signal({});
   calendarEvents: WritableSignal<Appointment[]> = signal([]);
-  RdvsPkg: WritableSignal<Appointment[]> = signal([]);
+  RdvsPkg: Signal<Appointment[]> = computed((): Appointment[] => {
+    const _start = this.datetime_start() as Date;
+    const _end = this.datetime_end() as Date;
+
+    return this.calendarEvents().filter((rdv: Appointment) => {
+      const _d = isoStringToDate(rdv.date);
+      return _d >= _start && _d < _end;
+    });
+  });
 
   actionsEnabled: Signal<boolean> = computed(() => {
     const actions = ["viewEvent", "reportEvent"];
@@ -75,14 +83,13 @@ export class EventComponent implements OnInit {
       if(value) this.handleOutsideClick(value as EventTarget);
     })
 
-    // transform props binding to datetime
-    this.datetime_start.set(fixDateTime(this.eventDate as Date, this.eventTime as string));
-    this.datetime_end.set(fixDateTime(
-      this.eventDate as Date,
-      incrementTime(this.eventTime as string)
-    ));
-    // filt events
-    this.eventEvents();
+    this.setDatetime();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+      if(changes?.['evenDate']?.currentValue || changes?.['eventTime']?.currentValue) {
+        this.setDatetime();
+      }
   }
 
   handleOutsideClick(target: EventTarget): void {
@@ -117,15 +124,13 @@ export class EventComponent implements OnInit {
     this.popupb.set(_bpos.y > _bpar.height * 0.8);
   }
 
-  //filt and Retrieve <Event /> data
-  eventEvents(): void {
-    const _start = this.datetime_start() as Date;
-    const _end = this.datetime_end() as Date;
-
-    this.RdvsPkg.set(this.calendarEvents().filter((rdv: Appointment) => {
-      const _d = isoStringToDate(rdv.date);
-      return _d >= _start && _d < _end;
-    }));
+  setDatetime(): void {
+    // transform props binding to datetime
+    this.datetime_start.set(fixDateTime(this.eventDate as Date, this.eventTime as string));
+    this.datetime_end.set(fixDateTime(
+      this.eventDate as Date,
+      incrementTime(this.eventTime as string)
+    ));
   }
 
   viewEvent(id: string | number | unknown): void {

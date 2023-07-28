@@ -17,7 +17,6 @@ export class LeftMenuComponent implements OnInit, OnChanges {
   @Input() date?: Date | undefined = undefined;
 
   @Output() calendarDatepicker: EventEmitter<Date> = new EventEmitter<Date>(true);
-  @Output() calendarClose: EventEmitter<void> = new EventEmitter<void>(true);
 
   configs: WritableSignal<Configs> = signal({});
   dateRequested: WritableSignal<Date | undefined> = signal(this.date);

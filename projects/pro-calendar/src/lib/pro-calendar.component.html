@@ -6,18 +6,21 @@
       #leftMenu
       [date]="externalRequestDate()"
       (calendarDatepicker)="dateSelected.set($event)"
-      (calendarClose)="calendarClosed.emit()"
     >
       <ng-template #loader>
-        <ng-container *ngTemplateOutlet="loaderRef; context:{'calendarGotLoading': calendarGotLoading()}"></ng-container>
+        <span *ngIf="loaderRef" class="inline-flex">
+          <ng-container *ngTemplateOutlet="loaderRef; context:{'calendarGotLoading': isLoading()}"></ng-container>
+        </span>
         <!-- default loader -->
-        <loader-widget *ngIf="!loaderRef && calendarGotLoading()" />
+        <loader-widget *ngIf="!loaderRef && isLoading()" />
       </ng-template>
 
-      <ng-template #closeButton let-calendarClose="calendarClose">
-        <ng-container *ngTemplateOutlet="closeButtonRef; context:{'calendarClose':calendarClose}"></ng-container>
+      <ng-template #closeButton>
+         <span *ngIf="closeButtonRef" (click)="calendarClosed.emit()" class="inline-flex">
+            <ng-container *ngTemplateOutlet="closeButtonRef"></ng-container>
+         </span>
         <!-- default close button -->
-        <close-button *ngIf="!closeButtonRef" (tap)="calendarClose.emit()" />
+        <close-button *ngIf="!closeButtonRef" (tap)="calendarClosed.emit()" />
       </ng-template>
 
       <ng-template #sideEvent>
@@ -76,6 +79,7 @@
             [weekDays]="weekDays()"
             [dateSelected]="dateSelected()"
             [dayTimes]="dayTimes()" 
+            [eventCard]="eventCardRef"
           />
         </ng-container>
         
@@ -84,17 +88,19 @@
         <ng-container *ngIf="defineView() === 'day'">
           <day-view 
             [dateSelected]="dateSelected()" 
-            [dayTimes]="dayTimes()" 
+            [dayTimes]="dayTimes()"
+            [eventCard]="eventCardRef"
           />
         </ng-container>
 
         
         <!--calendar month-view-->
         <ng-container *ngIf="defineView() === 'month'">
-          <month-view 
-            [weekDays]="weekDays()" 
-            [monthDays]="monthDays()" 
-            [dateSelected]="dateSelected()" 
+          <month-view
+            [weekDays]="weekDays()"
+            [monthDays]="monthDays()"
+            [dateSelected]="dateSelected()"
+            [eventCard]="eventCardRef"
           />
         </ng-container>
         

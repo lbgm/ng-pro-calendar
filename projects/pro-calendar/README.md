@@ -6,8 +6,8 @@ Professional Calendar for Angular
   - [Install](#install)
   - [Screenshot with Native Datepicker](#screenshot-with-native-datepicker)
   - [Screenshot with Material Datepicker](#screenshot-with-material-datepicker)
-  - [Use](#use)
   - [Props \& Types](#props--types)
+  - [Use](#use)
   - [Events](#events)
   - [Slots](#slots)
   - [Custom HTML Events fired](#custom-html-events-fired)
@@ -26,6 +26,71 @@ npm i ng-pro-calendar
 ## Screenshot with Material Datepicker
 
 ![ng-pro-calendar screenshot with material datepicker]()
+
+## Props & Types
+
+```ts
+type T_View = 'day' | 'week' | 'month';
+
+type T_Action = {
+  icon?: boolean;
+  text?: string;
+}
+
+type Configs = {
+  viewEvent?: T_Action;
+  reportEvent?: T_Action;
+  searchPlaceholder?: string;
+  eventName?: string;
+  closeText?: string;
+  nativeDatepicker?: boolean;
+}
+
+type Appointment = {
+  id: string;
+  name: string;
+  date: string; //DateIsoString
+  keywords: string;
+  comment?: string;
+  createdAt?: string; //DateIsoString
+  updatedAt?: string; //DateIsoString
+}
+
+// @Input()
+class ProCalendarComponent {
+
+  @Input() date?: string = undefined; // DateIsoString
+
+  @Input() view?: T_View = "week";
+
+  @Input() events?: Appointment[] = [];
+
+  @Input() loading?: boolean = false;
+
+  @Input() config?: Configs = {
+    viewEvent: {
+      icon: true,
+      text: "",
+    },
+    reportEvent: {
+      icon: true,
+      text: "",
+    },
+    searchPlaceholder: "",
+    eventName: "",
+    closeText: "",
+    nativeDatepicker: true,
+  };
+
+  // ...
+}
+```
+
+`nativeDatepicker`:
+> false or undefined : use Material DatePicker instead
+
+`property?: T_Action`:
+> undefined : the action is disabled
 
 ## Use
 
@@ -139,71 +204,6 @@ export class AppComponent implements OnInit {
 />
 ```
 
-## Props & Types
-
-```ts
-type T_View = 'day' | 'week' | 'month';
-
-type T_Action = {
-  icon?: boolean;
-  text?: string;
-}
-
-type Configs = {
-  viewEvent?: T_Action;
-  reportEvent?: T_Action;
-  searchPlaceholder?: string;
-  eventName?: string;
-  closeText?: string;
-  nativeDatepicker?: boolean;
-}
-
-type Appointment = {
-  id: string;
-  name: string;
-  date: string; //DateIsoString
-  keywords: string;
-  comment?: string;
-  createdAt?: string; //DateIsoString
-  updatedAt?: string; //DateIsoString
-}
-
-// @Input()
-class ProCalendarComponent {
-
-  @Input() date?: string = undefined; // DateIsoString
-
-  @Input() view?: T_View = "week";
-
-  @Input() events?: Appointment[] = [];
-
-  @Input() loading?: boolean = false;
-
-  @Input() config?: Configs = {
-    viewEvent: {
-      icon: true,
-      text: "",
-    },
-    reportEvent: {
-      icon: true,
-      text: "",
-    },
-    searchPlaceholder: "",
-    eventName: "",
-    closeText: "",
-    nativeDatepicker: true,
-  };
-
-  // ...
-}
-```
-
-`nativeDatepicker`:
-> false or undefined : use Material DatePicker instead
-
-`property?: T_Action`:
-> undefined : the action is disabled
-
 ## Events
 
 `(calendarClosed)`:
@@ -238,12 +238,12 @@ Draw your own calendar using scoped slots
         <!-- &#454; -->
     <!-- </ng-template> -->
 
-    <!-- <ng-template let-calendarClose="calendarClose" #closeButton> -->
-        <!-- calendarClose.emit() -->
+    <!-- <ng-template #closeButton> -->
+        <!-- &#454; -->
     <!-- </ng-template> -->
 
     <!-- <ng-template let-date="date" let-time="time" let-cardEvent="cardEvent" #eventCard> -->
-        <!-- use this slot to show calendar event in appearance you want -->
+        <!-- use this template to show calendar event in appearance you want -->
         <!--
         date: Date;
         time: string;
@@ -252,7 +252,7 @@ Draw your own calendar using scoped slots
     <!-- </ng-template> -->
 
     <!-- <ng-template let-dateSelected="dateSelected" let-calendarEvents="calendarEvents" #sideEvent> -->
-        <!-- use this slot to show side events in appearance you want -->
+        <!-- use this template to show side event in appearance you want -->
         <!-- dateSelected: Date; -->
         <!-- calendarEvents: Appointment[]; // all events -->
     <!-- </ng-template> -->
