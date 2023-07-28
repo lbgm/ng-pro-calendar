@@ -141,12 +141,6 @@ export class AppComponent implements OnInit {
 
 ## Props & Types
 
-`nativeDatepicker`:
-> false or undefined : use Material DatePicker instead
-
-`property?: T_Action`:
-> undefined : the action is disabled
-
 ```ts
 type T_View = 'day' | 'week' | 'month';
 
@@ -174,35 +168,41 @@ type Appointment = {
   updatedAt?: string; //DateIsoString
 }
 
-// Props with default
-interface Props {
-  date?: string;
-  view?: T_View;
-  events?: Appointment[];
-  loading?: boolean;
-  config?: Configs;
-}
+// @Input()
+class ProCalendarComponent {
 
-// default 
-date = undefined;
-view = "week";
-events = [];
-loading = false;
-config = {
+  @Input() date?: string = undefined; // DateIsoString
+
+  @Input() view?: T_View = "week";
+
+  @Input() events?: Appointment[] = [];
+
+  @Input() loading?: boolean = false;
+
+  @Input() config?: Configs = {
     viewEvent: {
-    icon: true,
-    text: "",
+      icon: true,
+      text: "",
     },
     reportEvent: {
-    icon: true,
-    text: "",
+      icon: true,
+      text: "",
     },
     searchPlaceholder: "",
     eventName: "",
     closeText: "",
     nativeDatepicker: true,
-};
+  };
+
+  // ...
+}
 ```
+
+`nativeDatepicker`:
+> false or undefined : use Material DatePicker instead
+
+`property?: T_Action`:
+> undefined : the action is disabled
 
 ## Events
 
@@ -243,7 +243,7 @@ Draw your own calendar using scoped slots
     <!-- </ng-template> -->
 
     <!-- <ng-template let-date="date" let-time="time" let-cardEvent="cardEvent" #eventCard> -->
-        <!-- use this slot to show yourself calendar event in appearance you want -->
+        <!-- use this slot to show calendar event in appearance you want -->
         <!--
         date: Date;
         time: string;
@@ -252,7 +252,7 @@ Draw your own calendar using scoped slots
     <!-- </ng-template> -->
 
     <!-- <ng-template let-dateSelected="dateSelected" let-calendarEvents="calendarEvents" #sideEvent> -->
-        <!-- use this slot to show yourself side events in appearance you want -->
+        <!-- use this slot to show side events in appearance you want -->
         <!-- dateSelected: Date; -->
         <!-- calendarEvents: Appointment[]; // all events -->
     <!-- </ng-template> -->
