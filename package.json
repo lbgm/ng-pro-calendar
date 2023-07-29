@@ -4,6 +4,14 @@
   "description": "Professional Calendar for Angular",
   "author": "@lbgm",
   "license": "GPL-3.0-or-later",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lbgm/ng-pro-calendar.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lbgm/ng-pro-calendar/issues"
+  },
+  "homepage": "https://github.com/lbgm/ng-pro-calendar#readme",
   "keywords": [
     "angular",
     "typescript",
