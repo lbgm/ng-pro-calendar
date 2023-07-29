@@ -35,7 +35,7 @@
           <ng-container *ngIf="!sideEventRef">
             <side-event [eventDate]="dateSelected()" />
             <!--_-->
-            <side-event [eventDate]="nextDate(dateSelected())" />
+            <side-event *ngIf="dateSelected().toLocaleDateString('en-CA') != nextDate(dateSelected()).toLocaleDateString('en-CA')" [eventDate]="nextDate(dateSelected())" />
           </ng-container>
         </div>
       </ng-template>
