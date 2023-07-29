@@ -124,7 +124,7 @@ export class AppModule { }
 
 ```ts
 import { Component, OnInit } from '@angular/core';
-import { Appointment, Configs, E_CustomEvents } from 'pro-calendar';
+import { Appointment, Configs, E_CustomEvents } from 'ng-pro-calendar';
 
 @Component({
   selector: 'app-root',
