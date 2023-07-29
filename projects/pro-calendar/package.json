@@ -2,6 +2,14 @@
   "name": "ng-pro-calendar",
   "version": "0.0.1",
   "description": "Professional Calendar for Angular",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lbgm/ng-pro-calendar.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lbgm/ng-pro-calendar/issues"
+  },
+  "homepage": "https://github.com/lbgm/ng-pro-calendar#readme",
   "keywords": [
     "angular",
     "typescript",

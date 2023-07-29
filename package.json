@@ -1,6 +1,21 @@
 {
   "name": "ng-pro-calendar",
   "version": "0.0.0",
+  "description": "Professional Calendar for Angular",
+  "author": "@lbgm",
+  "license": "GPL-3.0-or-later",
+  "keywords": [
+    "angular",
+    "typescript",
+    "lbgm",
+    "angular library",
+    "calendar",
+    "professional"
+  ],
+  "engines": {
+    "node": ">=16.20.0",
+    "npm": ">=8.19.4"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

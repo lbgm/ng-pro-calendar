@@ -56,7 +56,7 @@ export class AppComponent implements OnInit {
     searchPlaceholder: "",
     eventName: "",
     closeText: "",
-    nativeDatepicker: true,
+    nativeDatepicker: false,
   };
 
   ngOnInit(): void {

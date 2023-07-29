@@ -25,7 +25,7 @@ npm i ng-pro-calendar
 
 ## Screenshot with Material Datepicker
 
-![ng-pro-calendar screenshot with material datepicker](https://user-images.githubusercontent.com/92580505/256953974-76a965cd-8eab-4a81-83a5-16a87a939ae7.png)
+![ng-pro-calendar screenshot with material datepicker](https://user-images.githubusercontent.com/92580505/256956176-f839a696-f955-4fcd-8779-9ff504bb9078.png)
 
 ## Props & Types
 
