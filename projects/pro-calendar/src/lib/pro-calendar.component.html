@@ -51,6 +51,7 @@
         <calendar-arrows
           (left)="leftMenuChild.datepicked.set(prevDate(dateSelected()))"
           (right)="leftMenuChild.datepicked.set(nextDate(dateSelected()))"
+          (today)="leftMenuChild.datepicked.set($event)"
           [label]="getSelectedDateLabel"
           [rightSwitchArrow]="rightSwitchArrowRef"
           [leftSwitchArrow]="leftSwitchArrowRef"

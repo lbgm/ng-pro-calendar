@@ -33,6 +33,7 @@ export type Configs = {
     eventName?: string;
     closeText?: string;
     nativeDatepicker?: boolean;
+    todayButton?: boolean;
 }
 
 export type IStartEndDates = {

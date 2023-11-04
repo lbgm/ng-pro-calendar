@@ -1,6 +1,22 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Appointment, Configs } from '../types/main'
+import { Appointment, Configs } from '../types/main';
+
+export const DEFAULT_CONFIGS: Configs = {
+  viewEvent: {
+    icon: true,
+    text: "",
+  },
+  reportEvent: {
+    icon: true,
+    text: "",
+  },
+  searchPlaceholder: "",
+  eventName: "",
+  closeText: "",
+  nativeDatepicker: true,
+  todayButton: false
+};
 
 @Injectable({
   providedIn: 'root'
@@ -9,20 +25,7 @@ export class StoreService {
 
   #events: BehaviorSubject<Appointment[]> = new BehaviorSubject<Appointment[]>([]);
 
-  #configs: BehaviorSubject<Configs> = new BehaviorSubject<Configs>({
-    viewEvent: {
-      icon: true,
-      text: "",
-    },
-    reportEvent: {
-      icon: true,
-      text: "",
-    },
-    searchPlaceholder: "",
-    eventName: "",
-    closeText: "",
-    nativeDatepicker: true,
-  });
+  #configs: BehaviorSubject<Configs> = new BehaviorSubject<Configs>({ ...DEFAULT_CONFIGS });
 
   constructor() { }
 

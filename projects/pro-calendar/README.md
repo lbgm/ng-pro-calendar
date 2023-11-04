@@ -11,7 +11,6 @@ Professional Calendar for Angular
   - [Events](#events)
   - [Slots](#slots)
   - [Custom HTML Events fired](#custom-html-events-fired)
-  - [Support me ?](#support-me-)
 
 ## Install
 
@@ -44,6 +43,7 @@ type Configs = {
   eventName?: string;
   closeText?: string;
   nativeDatepicker?: boolean;
+  todayButton?: boolean;
 }
 
 type Appointment = {
@@ -66,25 +66,13 @@ class ProCalendarComponent {
   @Input() events?: Appointment[] = [];
 
   @Input() loading?: boolean = false;
-
-  @Input() config?: Configs = {
-    viewEvent: {
-      icon: true,
-      text: "",
-    },
-    reportEvent: {
-      icon: true,
-      text: "",
-    },
-    searchPlaceholder: "",
-    eventName: "",
-    closeText: "",
-    nativeDatepicker: true,
-  };
+  
+  @Input() config?: Configs = { ...DEFAULT_CONFIGS };
 
   // ...
 }
 ```
+> You can import `DEFAULT_CONFIGS` from ng-pro-calendar;
 
 `nativeDatepicker`:
 > false or undefined : use Material DatePicker instead
@@ -267,8 +255,3 @@ Draw your own calendar using scoped slots
 > You can listen these events like described on [Use](#use).
 
 > On default `#sideEvent template`, when user clicks on event, `calendar.request.view` is fired.
-
-## Support me ?
-
-<p>encourage me to do even more...</p>
-<a href="https://www.buymeacoffee.com/lbgm" title="Buy me a coffee ?" target="_blank" rel="nofollow"><img align="left" src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" height="50" width="210" alt="lbgmcoffee" data-canonical-src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"></a><br>

@@ -15,6 +15,7 @@ export class CalendarArrowsComponent implements OnInit {
 
   @Output() left: EventEmitter<void> = new EventEmitter<void>(true);
   @Output() right: EventEmitter<void> = new EventEmitter<void>(true);
+  @Output() today: EventEmitter<Date> = new EventEmitter<Date>();
 
   @Input('leftSwitchArrow') leftSwitchArrowRef!: TemplateRef<any>;
   @Input('rightSwitchArrow') rightSwitchArrowRef!: TemplateRef<any>;
@@ -27,5 +28,11 @@ export class CalendarArrowsComponent implements OnInit {
     this.storeService._configs.subscribe((value: Configs) => {
        this.configs.set(value);
     });
+  }
+
+  emitToday(event: Event): void {
+    event.preventDefault();
+    event.stopPropagation();
+    this.today.emit(new Date());
   }
 }

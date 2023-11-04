@@ -57,6 +57,7 @@ export class AppComponent implements OnInit {
     eventName: "",
     closeText: "",
     nativeDatepicker: false,
+    todayButton: true
   };
 
   ngOnInit(): void {

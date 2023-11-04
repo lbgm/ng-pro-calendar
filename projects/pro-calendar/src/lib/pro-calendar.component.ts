@@ -1,6 +1,6 @@
 import { Component, ContentChild, ElementRef, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, SimpleChanges, TemplateRef, ViewChild, WritableSignal, computed, effect, signal } from '@angular/core';
 import { Appointment, Configs, IStartEndDates, T_View } from './types/main';
-import { StoreService } from './services/store.service';
+import { DEFAULT_CONFIGS, StoreService } from './services/store.service';
 
 import {
   dateLabel,
@@ -43,20 +43,7 @@ export class ProCalendarComponent implements OnInit, OnChanges {
 
   @Input() loading?: boolean = false;
 
-  @Input() config?: Configs = {
-    viewEvent: {
-      icon: true,
-      text: "",
-    },
-    reportEvent: {
-      icon: true,
-      text: "",
-    },
-    searchPlaceholder: "",
-    eventName: "",
-    closeText: "",
-    nativeDatepicker: true,
-  };
+  @Input() config?: Configs = { ...DEFAULT_CONFIGS };
 
   @Output() calendarClosed: EventEmitter<void> = new EventEmitter<void>(true);
 

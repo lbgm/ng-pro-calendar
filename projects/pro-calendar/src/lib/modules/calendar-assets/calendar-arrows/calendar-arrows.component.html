@@ -25,6 +25,16 @@
     >
       {{ label }}
     </span> -->
+    <a
+      *ngIf="configs().todayButton"
+      role="button"
+      href="#"
+      class="capitalize bg-F4F4F5 text-18181B text-center py-0dt375 px-4 flex-shrink-0 font-medium text-xs mx-px hover:opacity-80 active:animate-pulse"
+      (click)="emitToday($event)"
+      :title="{{ 'today' | tr }}"
+    >
+      {{ 'today' | tr }}
+    </a>
     <!--right button icon master-->
     <a 
         class="bg-F4F4F5 rounded-tr-md rounded-br-md w-7 h-7 inline-flex flex-shrink-0 items-center justify-center hover:opacity-80 active:animate-pulse cursor-pointer calendar--arrows-right"
