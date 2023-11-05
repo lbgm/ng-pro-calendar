@@ -77,9 +77,9 @@ export class ProCalendarComponent implements OnInit, OnChanges {
   nextDate = nextDate;
 
   //TemplateRef
-  @ContentChild('loader') loaderRef!: TemplateRef<any>
-  @ContentChild('closeButton') closeButtonRef!: TemplateRef<any>
-  @ContentChild('searchIcon') searchIconRef!: TemplateRef<any>
+  @ContentChild('loader') loaderRef!: TemplateRef<any>;
+  @ContentChild('closeButton') closeButtonRef!: TemplateRef<any>;
+  @ContentChild('searchIcon') searchIconRef!: TemplateRef<any>;
   @ContentChild('rightSwitchArrow') rightSwitchArrowRef!: TemplateRef<any>;
   @ContentChild('leftSwitchArrow') leftSwitchArrowRef!: TemplateRef<any>;
   @ContentChild('sideEvent') sideEventRef!: TemplateRef<any>;
