@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, SimpleChanges, TemplateRef, WritableSignal, signal } from '@angular/core';
 import {
-  twoDigitTime,
+  twoDigit,
   incrementTime,
   fixDateTime,
   randomId,

@@ -15,7 +15,8 @@ export const DEFAULT_CONFIGS: Configs = {
   eventName: "",
   closeText: "",
   nativeDatepicker: true,
-  todayButton: false
+  todayButton: false,
+  firstDayOfWeek: 0
 };
 
 @Injectable({

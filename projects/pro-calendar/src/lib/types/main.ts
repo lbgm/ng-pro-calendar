@@ -34,6 +34,7 @@ export type Configs = {
     closeText?: string;
     nativeDatepicker?: boolean;
     todayButton?: boolean;
+    firstDayOfWeek?: 0 | 1;
 }
 
 export type IStartEndDates = {

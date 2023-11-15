@@ -20,11 +20,11 @@ npm i ng-pro-calendar
 
 ## Screenshot with Native Datepicker
 
-![ng-pro-calendar screenshot with native datepicker](https://user-images.githubusercontent.com/92580505/256954201-0d28b7f3-62e9-430c-ad7d-a37e235c6d1c.png)
+![ng-pro-calendar screenshot with native datepicker](https://user-images.githubusercontent.com/92580505/283180919-d601c5be-1f9d-4df4-a900-79b3efd932e7.png)
 
 ## Screenshot with Material Datepicker
 
-![ng-pro-calendar screenshot with material datepicker](https://user-images.githubusercontent.com/92580505/256956176-f839a696-f955-4fcd-8779-9ff504bb9078.png)
+![ng-pro-calendar screenshot with material datepicker](https://user-images.githubusercontent.com/92580505/283180238-8363d4b5-2f23-45c9-bcfb-f77a45e954b6.png)
 
 ## Props & Types
 
@@ -44,6 +44,7 @@ type Configs = {
   closeText?: string;
   nativeDatepicker?: boolean;
   todayButton?: boolean;
+  firstDayOfWeek?: 0 | 1;
 }
 
 type Appointment = {
@@ -170,6 +171,8 @@ export class AppComponent implements OnInit {
     eventName: "",
     closeText: "",
     nativeDatepicker: false,
+    todayButton: true,
+    firstDayOfWeek: 1
   };
 
   ngOnInit(): void {
