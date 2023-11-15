@@ -4,7 +4,7 @@ import { DEFAULT_CONFIGS, StoreService } from './services/store.service';
 
 import {
   dateLabel,
-  twoDigitTime,
+  twoDigit,
   incrementTime,
   fixDateTime,
   randomId,
@@ -98,13 +98,14 @@ export class ProCalendarComponent implements OnInit, OnChanges {
      */
     effect(() => {
       //refresh week days'date
-      this.weekDays.set(weekGenerator(getWeekInterval(this.dateSelected())));
+      this.weekDays.set(weekGenerator(getWeekInterval(this.dateSelected(), this.config?.firstDayOfWeek)));
       //refresh month days'date
-      this.monthDays.set(monthGenerator(this.dateSelected())._days);
+      const __m = monthGenerator(this.dateSelected(), this.config?.firstDayOfWeek);
+      this.monthDays.set(__m._days);
       //month date start & end
       this.monthDates.set({
-        start: monthGenerator(this.dateSelected()).firstDay,
-        end: monthGenerator(this.dateSelected()).lastDay,
+        start: __m.firstDay,
+        end: __m.lastDay,
       });
       // fetch appointments
       this.fetchAppointments();
@@ -184,12 +185,12 @@ export class ProCalendarComponent implements OnInit, OnChanges {
     // dayTimes generation from 08h00 to 23h00
     const _p1 = Array.from(
       { length: 23 - 8 + 1 },
-      (_, i) => `${twoDigitTime(i + 8)}:${twoDigitTime(0)}`
+      (_, i) => `${twoDigit(i + 8)}:${twoDigit(0)}`
     );
     //dayTimes generation from 07h00 to 23h59
     const _p2 = Array.from(
       { length: 7 - 0 + 1 },
-      (_, i) => `${twoDigitTime(i + 0)}:${twoDigitTime(0)}`
+      (_, i) => `${twoDigit(i + 0)}:${twoDigit(0)}`
     );
     this.dayTimes.set(_p1.concat(_p2));
   }
