@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Appointment, Configs, E_CustomEvents } from 'pro-calendar';
+import { Appointment, T_LANG, Configs, E_CustomEvents } from 'pro-calendar';
 
 @Component({
   selector: 'app-root',
@@ -60,6 +60,8 @@ export class AppComponent implements OnInit {
     todayButton: true,
     firstDayOfWeek: 1
   };
+
+  lang: T_LANG | undefined = undefined;
 
   ngOnInit(): void {
     [E_CustomEvents.VIEW, E_CustomEvents.REPORT].forEach((e: string) => {

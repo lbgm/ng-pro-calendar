@@ -29,7 +29,7 @@ npm i ng-pro-calendar
 
 ## Props & Types
 
-> Import and inspect types `T_View`, `T_Action`, `Appointment`, `Configs` from ng-pro-calendar
+> Import and inspect types `T_View`, `T_Action`, `Appointment`, `Configs`, `T_LANG` from ng-pro-calendar
 
 | Prop | Type | Required | Default |
 | :---     | :---     | :---         | :---        |
@@ -38,6 +38,7 @@ npm i ng-pro-calendar
 | `events` | `Appointment[]` | No    | `[]`        |
 | `loading`| `boolean` | No          | `false`     |
 | `config` | `Configs` | No          | `DEFAULT_CONFIGS` |
+| `lang`   | `T_LANG`  | No          | only supported languages; default: `undefined` (the calendar will use browser locale). |
 
 > You can import `DEFAULT_CONFIGS` from ng-pro-calendar
 
