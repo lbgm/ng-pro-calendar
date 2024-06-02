@@ -29,7 +29,7 @@ npm i ng-pro-calendar
 
 ## Props & Types
 
-> Import and inspect types `T_View`, `T_Action`, `Appointment`, `Configs` from 'ng-pro-calendar';
+> Import and inspect types `T_View`, `T_Action`, `Appointment`, `Configs` from ng-pro-calendar
 
 | Prop | Type | Required | Default |
 | :---     | :---     | :---         | :---        |
@@ -39,7 +39,7 @@ npm i ng-pro-calendar
 | `loading`| `boolean` | No          | `false`     |
 | `config` | `Configs` | No          | `DEFAULT_CONFIGS` |
 
-> You can import `DEFAULT_CONFIGS` from ng-pro-calendar;
+> You can import `DEFAULT_CONFIGS` from ng-pro-calendar
 
 ### Type `Configs`
 
