@@ -26,7 +26,15 @@ export class StoreService {
 
   #events: BehaviorSubject<Appointment[]> = new BehaviorSubject<Appointment[]>([]);
 
-  #configs: BehaviorSubject<Configs> = new BehaviorSubject<Configs>({ ...DEFAULT_CONFIGS });
+  #configs: BehaviorSubject<Configs> = new BehaviorSubject<Configs>({ 
+    ...DEFAULT_CONFIGS,
+    reportEvent: {
+      ...DEFAULT_CONFIGS.reportEvent
+    },
+    viewEvent: {
+      ...DEFAULT_CONFIGS.viewEvent
+    } 
+  });
 
   constructor() { }
 

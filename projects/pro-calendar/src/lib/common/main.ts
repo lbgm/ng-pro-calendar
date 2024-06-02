@@ -1,4 +1,10 @@
-const locale = window.navigator.language;
+import { T_LANG } from '../types/main';
+import { TranslateService } from "../services/translate.service";
+
+
+function locale(): T_LANG {
+  return TranslateService.instance.lang;
+}
 
 export const twoDigit = (part: string | number): string => {
   return String("0" + part).slice(-2);
@@ -39,14 +45,14 @@ export const randomId = (): string => {
 
 export const dayName = (date: Date | string, day: string | number): string => {
   const _day = copyDate(date);
-  return new Intl.DateTimeFormat(locale, { weekday: "short" }).format(
+  return new Intl.DateTimeFormat(locale(), { weekday: "short" }).format(
     _day.setDate(Number(day))
   );
 };
 
 export const monthName = (date: Date | string): string => {
   const _day = copyDate(date);
-  return new Intl.DateTimeFormat(locale, { month: "short" }).format(_day);
+  return new Intl.DateTimeFormat(locale(), { month: "short" }).format(_day);
 };
 
 export const dateLabel = (date: Date): string => {
@@ -60,7 +66,7 @@ export const dateLabel = (date: Date): string => {
     if (_d.getDate() === _nd.getDate() + 1) return "calendar.tomorrow";
   }
 
-  return new Intl.DateTimeFormat(locale, {
+  return new Intl.DateTimeFormat(locale(), {
     day: "numeric",
     month: "short",
     year: "numeric",
@@ -226,7 +232,7 @@ export const timeFormat = (time: string, full?: boolean): string => {
   const _nd = fixDateTime(new Date(), time);
   let options = {};
 
-  if(locale.indexOf("en") !== -1) {
+  if(locale().indexOf("en") !== -1) {
     options = full ? {
       hour: "numeric",
       minute: "numeric",
@@ -240,5 +246,5 @@ export const timeFormat = (time: string, full?: boolean): string => {
     minute: "numeric",
   }
 
-  return new Intl.DateTimeFormat(locale, options).format(_nd);
+  return new Intl.DateTimeFormat(locale(), options).format(_nd);
 };

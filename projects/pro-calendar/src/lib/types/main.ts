@@ -21,6 +21,8 @@ export type Appointment = {
 
 export type T_View = 'day' | 'week' | 'month';
 
+export type T_LANG = 'fr' | 'en' | 'pt' | 'es' | 'eu' | 'ru' | 'uk';
+
 export type T_Action = {
     icon?: boolean;
     text?: string;

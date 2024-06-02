@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { E_View, T_View } from '../../../types/main';
+import { originalOrder } from '../../../common/sorting.in.pipes';
 import { KeyValue } from '@angular/common';
 
 @Component({
@@ -11,9 +12,11 @@ import { KeyValue } from '@angular/common';
   ]
 })
 export class ViewToggleComponent implements OnInit {
-  @Input() view?: T_View = "week";
+  @Input({ required: false }) view: T_View = "week";
 
   @Output() viewChanged: EventEmitter<T_View> = new EventEmitter<T_View>(true);
+
+  originalOrder = originalOrder;
 
   tabs: Record<string, T_View> = {
     ...Object.fromEntries(Object.entries(E_View)),

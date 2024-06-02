@@ -1,5 +1,5 @@
 import { Component, ContentChild, ElementRef, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, SimpleChanges, TemplateRef, ViewChild, WritableSignal, computed, effect, signal } from '@angular/core';
-import { Appointment, Configs, IStartEndDates, T_View } from './types/main';
+import { Appointment, Configs, IStartEndDates, T_LANG, T_View } from './types/main';
 import { DEFAULT_CONFIGS, StoreService } from './services/store.service';
 
 import {
@@ -21,6 +21,7 @@ import {
 import { TrPipe } from './pipes/tr.pipe';
 import { LeftMenuComponent } from './modules/calendar-left-menu/left-menu/left-menu.component';
 import { UtilitiesService } from './services/utilities.service';
+import { TranslateService } from './services/translate.service';
 
 @Component({
   selector: 'pro-calendar',
@@ -35,15 +36,25 @@ import { UtilitiesService } from './services/utilities.service';
 })
 export class ProCalendarComponent implements OnInit, OnChanges {
 
-  @Input() date?: string = undefined;
+  @Input({ required: false }) date: string | undefined = undefined;
 
-  @Input() view?: T_View = "week";
+  @Input({ required: false }) view: T_View = "week";
 
-  @Input() events?: Appointment[] = [];
+  @Input({ required: false }) events: Appointment[] = [];
 
-  @Input() loading?: boolean = false;
+  @Input({ required: false }) loading: boolean = false;
 
-  @Input() config?: Configs = { ...DEFAULT_CONFIGS };
+  @Input({ required: false }) config: Configs = { 
+    ...DEFAULT_CONFIGS,
+    reportEvent: {
+      ...DEFAULT_CONFIGS.reportEvent
+    },
+    viewEvent: {
+      ...DEFAULT_CONFIGS.viewEvent
+    }
+  };
+
+  @Input({ required: false }) lang: T_LANG | undefined = undefined;
 
   @Output() calendarClosed: EventEmitter<void> = new EventEmitter<void>(true);
 
@@ -91,6 +102,7 @@ export class ProCalendarComponent implements OnInit, OnChanges {
     private el: ElementRef,
     private storeService: StoreService,
     private utilitiesService: UtilitiesService,
+    private translateService: TranslateService,
     private trPipe: TrPipe
   ) {
     /**
@@ -149,6 +161,11 @@ export class ProCalendarComponent implements OnInit, OnChanges {
     // loading
     if (changes?.['loading']?.currentValue) {
       this.isLoading.set(changes['loading'].currentValue as unknown as boolean);
+    }
+    // lang
+    if (changes?.['lang']?.currentValue) {
+      const lang = changes['lang'].currentValue;
+      if (lang && this.translateService.lang !== lang ) this.translateService.lang = lang;
     }
   }
 
@@ -225,6 +242,8 @@ export class ProCalendarComponent implements OnInit, OnChanges {
     this.storeService.$events = this.events as Appointment[];
     // config
     this.storeService.$configs = this.config as Configs;
+    // lang
+    if (this.lang) this.translateService.lang = this.lang;
   }
 
   @HostListener("document:click", ["$event"])
