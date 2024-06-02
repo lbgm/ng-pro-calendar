@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
       comment: "Faire une livraison à moto de Mont Sinaï à Calavi",
       id: "cl3eddmjz1435801pqwfa5ihd1",
       keywords: "Anniversaire",
-      name: "iréné Gandji",
+      name: "Rodolphe SOUNLIN",
     },
     {
       date: "2022-11-19T14:00:00.000Z",

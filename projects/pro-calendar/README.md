@@ -7,6 +7,7 @@ Professional Calendar for Angular
   - [Screenshot with Native Datepicker](#screenshot-with-native-datepicker)
   - [Screenshot with Material Datepicker](#screenshot-with-material-datepicker)
   - [Props \& Types](#props--types)
+    - [Type `Configs`](#type-configs)
   - [Use](#use)
   - [Events](#events)
   - [Slots](#slots)
@@ -28,58 +29,23 @@ npm i ng-pro-calendar
 
 ## Props & Types
 
-```ts
-type T_View = 'day' | 'week' | 'month';
+> Import and inspect types `T_View`, `T_Action`, `Appointment`, `Configs` from 'ng-pro-calendar';
 
-type T_Action = {
-  icon?: boolean;
-  text?: string;
-}
+| Prop | Type | Required | Default |
+| :---     | :---     | :---         | :---        |
+| `date`   | `string` `// iso string` | No           | `undefined` |
+| `view`   | `T_View` | No           | `"week"`    |
+| `events` | `Appointment[]` | No    | `[]`        |
+| `loading`| `boolean` | No          | `false`     |
+| `config` | `Configs` | No          | `DEFAULT_CONFIGS` |
 
-type Configs = {
-  viewEvent?: T_Action;
-  reportEvent?: T_Action;
-  searchPlaceholder?: string;
-  eventName?: string;
-  closeText?: string;
-  nativeDatepicker?: boolean;
-  todayButton?: boolean;
-  firstDayOfWeek?: 0 | 1;
-}
-
-type Appointment = {
-  id: string;
-  name: string;
-  date: string; //DateIsoString
-  keywords: string;
-  comment?: string;
-  createdAt?: string; //DateIsoString
-  updatedAt?: string; //DateIsoString
-}
-
-// @Input()
-class ProCalendarComponent {
-
-  @Input() date?: string = undefined; // DateIsoString
-
-  @Input() view?: T_View = "week";
-
-  @Input() events?: Appointment[] = [];
-
-  @Input() loading?: boolean = false;
-  
-  @Input() config?: Configs = { ...DEFAULT_CONFIGS };
-
-  // ...
-}
-```
 > You can import `DEFAULT_CONFIGS` from ng-pro-calendar;
 
-`nativeDatepicker`:
-> false or undefined : use Material DatePicker instead
+### Type `Configs`
 
-`property?: T_Action`:
-> undefined : the action is disabled
+> When you set `nativeDatepicker` to `false` or `undefined`, Material DatePicker will be used.
+
+> When you set a property with type `T_Action` to `undefined`, the action is disabled.
 
 ## Use
 
@@ -129,7 +95,7 @@ export class AppComponent implements OnInit {
       comment: "Faire une livraison à moto de Mont Sinaï à Calavi",
       id: "cl3eddmjz1435801pqwfa5ihd1",
       keywords: "Anniversaire",
-      name: "SAGBO Aimé",
+      name: "Rodolphe SOUNLIN"",
     },
     {
       date: "2022-11-19T14:00:00.000Z",

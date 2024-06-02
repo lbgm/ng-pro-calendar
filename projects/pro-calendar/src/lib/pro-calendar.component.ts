@@ -35,15 +35,23 @@ import { UtilitiesService } from './services/utilities.service';
 })
 export class ProCalendarComponent implements OnInit, OnChanges {
 
-  @Input() date?: string = undefined;
+  @Input({ required: false }) date: string | undefined = undefined;
 
-  @Input() view?: T_View = "week";
+  @Input({ required: false }) view: T_View = "week";
 
-  @Input() events?: Appointment[] = [];
+  @Input({ required: false }) events: Appointment[] = [];
 
-  @Input() loading?: boolean = false;
+  @Input({ required: false }) loading: boolean = false;
 
-  @Input() config?: Configs = { ...DEFAULT_CONFIGS };
+  @Input({ required: false }) config: Configs = { 
+    ...DEFAULT_CONFIGS,
+    reportEvent: {
+      ...DEFAULT_CONFIGS.reportEvent
+    },
+    viewEvent: {
+      ...DEFAULT_CONFIGS.viewEvent
+    }
+  };
 
   @Output() calendarClosed: EventEmitter<void> = new EventEmitter<void>(true);
 
