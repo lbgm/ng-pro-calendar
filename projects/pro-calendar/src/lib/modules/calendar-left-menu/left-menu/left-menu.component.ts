@@ -1,5 +1,5 @@
 import { Component, ContentChild, EventEmitter, Inject, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, TemplateRef, WritableSignal, effect, signal } from '@angular/core';
-import { Configs } from '../../../types/main';
+import { Configs, T_LANG } from '../../../types/main';
 import { StoreService } from '../../../services/store.service';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MAT_NATIVE_DATE_FORMATS, NativeDateAdapter } from '@angular/material/core';
@@ -48,10 +48,10 @@ export class LeftMenuComponent implements OnInit, OnChanges, OnDestroy {
       this.calendarDatepicker.emit(new Date(this.datepicked()));
     });
 
-    this.translateService.lang$.pipe(takeUntil(this.destroy$)).subscribe(() => {
+    this.translateService.lang$.pipe(takeUntil(this.destroy$)).subscribe((lang) => {
       // update locale for datepickers
-      this._locale = this.translateService.lang;
-      this._adapter.setLocale(this.translateService.lang);
+      this._locale = <T_LANG>lang;
+      this._adapter.setLocale(<T_LANG>lang);
     });
   }
 
