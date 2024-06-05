@@ -534,6 +534,10 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
+.static {
+  position: static;
+}
+
 .absolute {
   position: absolute;
 }
@@ -962,6 +966,10 @@ video {
   text-align: right;
 }
 
+.font-vpc {
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
+}
+
 .text-0dt625 {
   font-size: 0.625rem;
 }
@@ -1125,54 +1133,6 @@ video {
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
-}
-
-* {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-}
-
-@media screen and (-webkit-min-device-pixel-ratio:0)
-
-/*chrome*/
-  {
-  .custom-scrll::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-  }
-
-  .custom-scrll::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  .custom-scrll::-webkit-scrollbar-thumb {
-    border-radius: 6px;
-    background: rgba(14, 165, 233, .8);
-    border: 0;
-    display: none;
-  }
-
-  .custom-scrll:hover {
-    &.custom-scrll::-webkit-scrollbar-thumb {
-      display: initial;
-    }
-  }
-
-  .custom-scrll::-webkit-scrollbar-corner {
-    display: none;
-  }
-}
-
-@-moz-document url-prefix()
-
-/*firefox*/
-  {
-  .custom-scrll {
-    scrollbar-color: rgba(14, 165, 233, .8) transparent;
-    scrollbar-width: none;
-    &:hover {
-      scrollbar-width: thin;
-    }
-  }
 }
 
 .hover\:opacity-80:hover {
