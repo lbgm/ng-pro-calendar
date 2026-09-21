@@ -28,8 +28,8 @@ export class AppComponent implements OnInit {
       date: "2022-11-17T13:00:36.284Z",
       comment: "",
       id: "cl34856g01439801piot8vp3jr",
-      keywords: "Rencontre",
-      name: "Cornelia ADADJO",
+      keywords: "Projet Senou",
+      name: "Igor DOSSOU",
     },
     {
       date: "2022-11-10T07:00:00.000Z",
