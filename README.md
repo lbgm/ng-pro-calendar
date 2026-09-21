@@ -21,11 +21,11 @@ npm i ng-pro-calendar
 
 ## Screenshot with Native Datepicker
 
-<img width="1413" height="610" alt="vue-pro-calendar screenshot with native datepicker" src="https://github.com/lbgm/ng-pro-calendar/blob/main/public/assets/20260921182621.png" />
+<img width="1413" height="610" alt="ng-pro-calendar screenshot with native datepicker" src="https://github.com/lbgm/ng-pro-calendar/blob/main/public/assets/20260921184719.png" />
 
 ## Screenshot with Material Datepicker
 
-<img width="1410" height="629" alt="vue-pro-calendar screenshot with vcalendar datepicker" src="https://github.com/lbgm/ng-pro-calendar/blob/main/public/assets/20260921182715.png" />
+<img width="1410" height="629" alt="ng-pro-calendar screenshot with material datepicker" src="https://github.com/lbgm/ng-pro-calendar/blob/main/public/assets/20260921184544.png" />
 
 ## Props & Types
 
